@@ -170,4 +170,3 @@ Expected: only planned source, docs, tests, scripts, and generated media are cha
 - [ ] **Step 6: Commit and push**
 
 Commit the verified changes with `feat: refresh video editor portfolio`, recheck the remote/default GitHub Pages branch, then push without force. If authentication or branch protection blocks the push, preserve the local commit and report the exact blocker.
-

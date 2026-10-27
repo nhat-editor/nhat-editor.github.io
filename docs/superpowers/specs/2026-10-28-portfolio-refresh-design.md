@@ -50,4 +50,3 @@ Add canonical and complete social metadata, a local social preview image, Person
 - Keyboard, reduced-motion, and no-hover users can access the same content.
 - Automated structural checks, JavaScript syntax checks, local HTTP smoke checks, and desktop/mobile browser checks pass.
 - Repository changes are committed and pushed to the GitHub Pages branch when authenticated push access is available.
-

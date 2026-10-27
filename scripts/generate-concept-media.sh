@@ -12,4 +12,3 @@ for poster in "$concept_dir"/*.svg; do
     -an -c:v libvpx-vp9 -crf 39 -b:v 0 -deadline good -cpu-used 2 \
     "$concept_dir/$slug-preview.webm"
 done
-
