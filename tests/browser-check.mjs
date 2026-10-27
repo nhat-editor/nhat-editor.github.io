@@ -90,6 +90,12 @@ after(() => {
   server?.kill("SIGTERM");
 });
 
+test("skip link moves keyboard focus to the main landmark", async () => {
+  await evaluate("document.querySelector('.skip-link').focus(); document.querySelector('.skip-link').click(); true");
+  await waitFor(() => evaluate("document.activeElement.id === 'main-content'"));
+  assert.equal(await evaluate("document.activeElement.id"), "main-content");
+});
+
 test("showreel iframe is created only after activation", async () => {
   assert.equal(await evaluate("Boolean(document.querySelector('.reel-video iframe'))"), false);
   await evaluate("document.querySelector('.reel-play').click(); true");
@@ -110,9 +116,14 @@ test("project modal opens local video and restores trigger focus on close", asyn
   await waitFor(() => evaluate("document.activeElement.classList.contains('modal-close')"));
   const activeElement = await evaluate("document.activeElement.outerHTML");
   assert.equal(await evaluate("document.activeElement.classList.contains('modal-close')"), true, activeElement);
+  assert.equal(await evaluate("document.querySelector('main').inert && document.querySelector('header').inert"), true);
+  await send("Input.dispatchKeyEvent", { type: "keyDown", key: "Tab", code: "Tab", modifiers: 8 });
+  await send("Input.dispatchKeyEvent", { type: "keyUp", key: "Tab", code: "Tab", modifiers: 8 });
+  assert.equal(await evaluate("document.querySelector('#modal').contains(document.activeElement)"), true);
   assert.match(await evaluate("document.querySelector('#modalVideo').src"), /finance-explainer-preview\.webm/);
   await evaluate("document.querySelector('.modal-close').click(); true");
   assert.equal(await evaluate("document.querySelector('#modal').getAttribute('aria-hidden')"), "true");
+  assert.equal(await evaluate("document.querySelector('main').inert || document.querySelector('header').inert"), false);
   assert.equal(await evaluate("document.activeElement.classList.contains('work-btn')"), true);
 });
 

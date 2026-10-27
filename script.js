@@ -113,6 +113,7 @@ $$('a[href^="#"]').forEach((link) => {
     event.preventDefault();
     if (lenis) lenis.scrollTo(target, { offset: -20 });
     else target.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
+    if (link.classList.contains("skip-link")) target.focus({ preventScroll: true });
   });
 });
 
@@ -182,6 +183,10 @@ const modalTitle = $("#modalTitle");
 const modalClose = $(".modal-close", modal || document);
 let modalTrigger = null;
 
+function setPageInert(inert) {
+  $$('body > :not(#modal):not(script)').forEach((element) => { element.inert = inert; });
+}
+
 function openModal(videoUrl, title, trigger) {
   if (!modal || !modalVideo || !modalIframe || !videoUrl) return;
   modalTrigger = trigger || document.activeElement;
@@ -200,6 +205,7 @@ function openModal(videoUrl, title, trigger) {
 
   modal.classList.add("active");
   modal.setAttribute("aria-hidden", "false");
+  setPageInert(true);
   document.body.classList.add("no-scroll");
   const focusCloseButton = () => modalClose?.focus({ preventScroll: true });
   if (isLocalVideo) {
@@ -216,6 +222,7 @@ function closeModal() {
   if (!modal || modal.getAttribute("aria-hidden") === "true") return;
   modal.classList.remove("active");
   modal.setAttribute("aria-hidden", "true");
+  setPageInert(false);
   document.body.classList.remove("no-scroll");
 
   if (modalVideo) {
@@ -245,7 +252,10 @@ document.addEventListener("keydown", (event) => {
   }
   if (event.key !== "Tab") return;
 
-  const focusable = $$("button, a[href], video[controls], iframe", modal).filter((element) => !element.hidden);
+  const focusable = $$("button, a[href], video[controls], iframe", modal).filter((element) => {
+    const style = window.getComputedStyle(element);
+    return !element.hidden && !element.disabled && style.display !== "none" && style.visibility !== "hidden";
+  });
   if (!focusable.length) return;
   const first = focusable[0];
   const last = focusable[focusable.length - 1];
