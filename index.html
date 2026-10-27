@@ -3,36 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nguyen Quang Nhat — Video Editor & Motion Graphic Designer</title>
-  <meta name="description" content="Professional Video Editor specializing in Talking Head videos, Motion Graphics, and Clean Edits. Available for freelance projects worldwide." />
-
-  <meta property="og:title" content="Nguyen Quang Nhat — Video Editor" />
-  <meta property="og:description" content="Talking Head • Motion Graphics • Clean Edits" />
-  <meta property="og:image" content="https://picsum.photos/1200/630?random=99" />
+  <title>Nguyen Quang Nhat — Video Editor &amp; Motion Designer</title>
+  <meta name="description" content="Video editor and motion designer creating story-first talking head videos, product films, social campaigns, and clean motion graphics for international clients." />
+  <meta name="theme-color" content="#050806" />
+  <link rel="canonical" href="https://nhat-editor.github.io/" />
+  <meta property="og:title" content="Nguyen Quang Nhat — Video Editor &amp; Motion Designer" />
+  <meta property="og:description" content="Story-first edits, motion graphics, and visual storytelling for brands and creators." />
+  <meta property="og:image" content="https://nhat-editor.github.io/assets/social-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://nhat-editor.github.io/" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
-
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nguyen Quang Nhat — Video Editor &amp; Motion Designer" />
+  <meta name="twitter:description" content="Story-first edits, motion graphics, and visual storytelling for brands and creators." />
+  <meta name="twitter:image" content="https://nhat-editor.github.io/assets/social-preview.png" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://nhat-editor.github.io/#person",
+        "name": "Nguyen Quang Nhat",
+        "url": "https://nhat-editor.github.io/",
+        "image": "https://nhat-editor.github.io/assets/avatar.png",
+        "jobTitle": "Video Editor and Motion Designer",
+        "email": "mailto:Nhatfreelancer.dv@gmail.com",
+        "sameAs": ["https://github.com/nhat-editor"]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://nhat-editor.github.io/#service",
+        "name": "Nguyen Quang Nhat — Video Editing and Motion Design",
+        "url": "https://nhat-editor.github.io/",
+        "founder": { "@id": "https://nhat-editor.github.io/#person" },
+        "areaServed": "Worldwide",
+        "serviceType": ["Video Editing", "Motion Design", "Color Grading", "Sound Design"]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <!-- Thêm dòng này để tạo nền chuyển động -->
-  <div class="bg-glow"></div>
-
-  <!-- Custom cursor -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
-
-  <!-- Grain -->
-  <div class="grain"></div>
-
-  <!-- Preloader -->
-  <div class="preloader">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="preloader" aria-hidden="true">
     <div class="preloader-inner">
       <span class="preloader-num">0</span>
       <div class="preloader-line"><div class="preloader-bar"></div></div>
@@ -40,339 +65,122 @@
     </div>
   </div>
 
-  <!-- Navbar -->
   <header class="nav">
-    <a href="#home" class="nav-logo">QN<span>.</span></a>
-    <nav class="nav-links">
+    <a href="#home" class="nav-logo" aria-label="Nguyen Quang Nhat — home">QN<span>.</span></a>
+    <nav class="nav-links" aria-label="Primary navigation">
       <a href="#showreel" data-cursor="hover">Showreel</a>
-      <a href="#about" data-cursor="hover">About</a>
       <a href="#work" data-cursor="hover">Work</a>
+      <a href="#about" data-cursor="hover">About</a>
       <a href="#process" data-cursor="hover">Process</a>
+      <a href="#expectations" data-cursor="hover">Why Me</a>
       <a href="#contact" data-cursor="hover">Contact</a>
     </nav>
-    <button class="nav-toggle" aria-label="Menu">
-      <span></span><span></span>
-    </button>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span></button>
   </header>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" aria-hidden="true">
+    <a href="#showreel">Showreel</a><a href="#work">Work</a><a href="#about">About</a>
+    <a href="#process">Process</a><a href="#expectations">Why Me</a><a href="#contact">Contact</a>
+  </nav>
 
-  <!-- Mobile menu -->
-  <div class="mobile-menu">
-    <a href="#showreel">Showreel</a>
-    <a href="#about">About</a>
-    <a href="#work">Work</a>
-    <a href="#process">Process</a>
-    <a href="#contact">Contact</a>
+  <main id="main-content">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"><div class="hero-motion"><span></span><span></span><span></span></div><div class="hero-vignette"></div></div>
+      <div class="hero-content">
+        <p class="hero-kicker" data-reveal>Portfolio · Available worldwide</p>
+        <h1 class="hero-title" id="hero-title"><span class="line"><span data-reveal>Nguyen</span></span><span class="line"><span data-reveal>Quang Nhat</span></span></h1>
+        <p class="hero-sub" data-reveal>Video Editor &amp; Motion Designer crafting clean, fast-paced edits and visual stories that make every second earn attention.</p>
+        <div class="hero-cta" data-reveal>
+          <a href="#showreel" class="btn btn-primary magnetic" data-cursor="hover"><span>Watch Showreel</span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></a>
+          <a href="#contact" class="btn btn-ghost magnetic" data-cursor="hover"><span>Start a Project</span><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg></a>
+        </div>
+      </div>
+      <div class="hero-marquee" aria-label="Editing specialties"><div class="marquee-track">
+        <span>Talking Head</span><span>·</span><span>Motion Graphics</span><span>·</span><span>Clean Edits</span><span>·</span><span>Color Grading</span><span>·</span><span>Sound Design</span><span>·</span><span>Dynamic Captions</span><span>·</span>
+        <span>Talking Head</span><span>·</span><span>Motion Graphics</span><span>·</span><span>Clean Edits</span><span>·</span><span>Color Grading</span><span>·</span><span>Sound Design</span><span>·</span><span>Dynamic Captions</span><span>·</span>
+      </div></div>
+    </section>
+
+    <section class="showreel" id="showreel" aria-labelledby="showreel-title">
+      <div class="container">
+        <div class="section-head"><p class="section-kicker" data-reveal>01 — Real Work</p><h2 class="section-title" id="showreel-title" data-reveal>Featured Showreel</h2><p class="section-intro" data-reveal>A focused selection of editing, pacing, motion, and visual storytelling work.</p></div>
+        <div class="reel-wrap" data-reveal>
+          <div class="reel-poster"><img src="assets/social-preview.svg" alt="Nguyen Quang Nhat video editing showreel" width="1200" height="630" /><button class="reel-play" type="button" data-cursor="play" aria-label="Play Nguyen Quang Nhat's showreel"><svg width="80" height="80" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="39" stroke="currentColor" stroke-width="1" fill="none"/><path d="M32 26l22 14-22 14z" fill="currentColor"/></svg></button></div>
+          <div class="reel-video" data-showreel-src="https://www.youtube.com/embed/BeYzqS5ig2o" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="work" id="work" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head"><p class="section-kicker" data-reveal>02 — Selected Works</p><h2 class="section-title" id="work-title" data-reveal>Editing Scenarios</h2><p class="section-intro" data-reveal>Temporary concept studies showing how I think about structure, rhythm, and visual communication. These are illustrative, not client commissions.</p></div>
+        <div class="work-grid" id="workGrid">
+          <article class="work-card" data-preview="assets/concepts/finance-explainer-preview.webm" data-reveal>
+            <div class="work-thumb"><img src="assets/concepts/finance-explainer.svg" alt="Finance explainer concept with animated data graphics" width="1600" height="900" loading="lazy" /><video class="work-preview" muted loop playsinline preload="none" poster="assets/concepts/finance-explainer.svg" aria-hidden="true"><source data-src="assets/concepts/finance-explainer-preview.webm" type="video/webm" /></video><span class="preview-hint" aria-hidden="true">Hover to preview</span><div class="work-overlay"><p class="concept-label">Concept Project · Illustrative Content</p><p class="work-cat">Talking Head · Finance &amp; Tech</p><h3 class="work-title">Clarity in Every Cut</h3></div></div>
+            <div class="work-body"><div class="case-study"><p><strong>Brief:</strong> Turn a dense finance topic into an approachable, high-retention explainer.</p><p><strong>Approach:</strong> Tight pacing, kinetic captions, restrained data motion, and purposeful b-roll cues.</p><p><strong>Intended outcome:</strong> Help viewers understand the core idea without losing momentum.</p></div><ul class="work-tags"><li>DaVinci Resolve</li><li>Dynamic Captions</li><li>Data Motion</li></ul><button class="btn btn-ghost work-btn" type="button" data-video="assets/concepts/finance-explainer-preview.webm" data-title="Clarity in Every Cut — Concept Preview"><span>View Motion Preview</span></button></div>
+          </article>
+          <article class="work-card" data-preview="assets/concepts/saas-launch-preview.webm" data-reveal>
+            <div class="work-thumb"><img src="assets/concepts/saas-launch.svg" alt="SaaS launch concept with floating product interface panels" width="1600" height="900" loading="lazy" /><video class="work-preview" muted loop playsinline preload="none" poster="assets/concepts/saas-launch.svg" aria-hidden="true"><source data-src="assets/concepts/saas-launch-preview.webm" type="video/webm" /></video><span class="preview-hint" aria-hidden="true">Hover to preview</span><div class="work-overlay"><p class="concept-label">Concept Project · Illustrative Content</p><p class="work-cat">Product Film · SaaS</p><h3 class="work-title">From Feature to Feeling</h3></div></div>
+            <div class="work-body"><div class="case-study"><p><strong>Brief:</strong> Introduce a digital product without turning the film into a feature checklist.</p><p><strong>Approach:</strong> Interface choreography, focused typography, smooth transitions, and benefit-led sequencing.</p><p><strong>Intended outcome:</strong> Make the product feel clear, useful, and ready to explore.</p></div><ul class="work-tags"><li>Fusion 3D</li><li>UI Motion</li><li>Sound Design</li></ul><button class="btn btn-ghost work-btn" type="button" data-video="assets/concepts/saas-launch-preview.webm" data-title="From Feature to Feeling — Concept Preview"><span>View Motion Preview</span></button></div>
+          </article>
+          <article class="work-card" data-preview="assets/concepts/property-story-preview.webm" data-reveal>
+            <div class="work-thumb"><img src="assets/concepts/property-story.svg" alt="Cinematic property-film concept in dark architectural tones" width="1600" height="900" loading="lazy" /><video class="work-preview" muted loop playsinline preload="none" poster="assets/concepts/property-story.svg" aria-hidden="true"><source data-src="assets/concepts/property-story-preview.webm" type="video/webm" /></video><span class="preview-hint" aria-hidden="true">Hover to preview</span><div class="work-overlay"><p class="concept-label">Concept Project · Illustrative Content</p><p class="work-cat">Property · Cinematic Story</p><h3 class="work-title">Space Becomes a Feeling</h3></div></div>
+            <div class="work-body"><div class="case-study"><p><strong>Brief:</strong> Present a property through atmosphere rather than a conventional room-by-room tour.</p><p><strong>Approach:</strong> Patient reveals, motivated speed ramps, warm sound texture, and cohesive color.</p><p><strong>Intended outcome:</strong> Let prospective viewers imagine the experience of being there.</p></div><ul class="work-tags"><li>Color Grading</li><li>Sound Design</li><li>Visual Rhythm</li></ul><button class="btn btn-ghost work-btn" type="button" data-video="assets/concepts/property-story-preview.webm" data-title="Space Becomes a Feeling — Concept Preview"><span>View Motion Preview</span></button></div>
+          </article>
+          <article class="work-card" data-preview="assets/concepts/social-campaign-preview.webm" data-reveal>
+            <div class="work-thumb"><img src="assets/concepts/social-campaign.svg" alt="Fast-paced vertical social campaign concept" width="1600" height="900" loading="lazy" /><video class="work-preview" muted loop playsinline preload="none" poster="assets/concepts/social-campaign.svg" aria-hidden="true"><source data-src="assets/concepts/social-campaign-preview.webm" type="video/webm" /></video><span class="preview-hint" aria-hidden="true">Hover to preview</span><div class="work-overlay"><p class="concept-label">Concept Project · Illustrative Content</p><p class="work-cat">Short Form · Social Campaign</p><h3 class="work-title">Stop the Scroll, Keep the Story</h3></div></div>
+            <div class="work-body"><div class="case-study"><p><strong>Brief:</strong> Build a repeatable short-form system with a strong opening and recognizable visual language.</p><p><strong>Approach:</strong> Hook-first structure, rhythmic punch-ins, readable captions, and modular graphic beats.</p><p><strong>Intended outcome:</strong> Create consistent episodes that remain clear even when watched without sound.</p></div><ul class="work-tags"><li>Vertical Editing</li><li>Kinetic Type</li><li>Content System</li></ul><button class="btn btn-ghost work-btn" type="button" data-video="assets/concepts/social-campaign-preview.webm" data-title="Stop the Scroll — Concept Preview"><span>View Motion Preview</span></button></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-img" data-reveal><img src="assets/avatar.png" alt="Portrait of Nguyen Quang Nhat" width="800" height="1000" loading="lazy" /></div>
+        <div class="about-text">
+          <p class="section-kicker" data-reveal>03 — About Me</p><h2 class="section-title" id="about-title" data-reveal>Story first,<br/>frames second.</h2>
+          <p data-reveal>I’m <strong>Nguyen Quang Nhat</strong>, a video editor and motion designer focused on clean storytelling, intentional pacing, and motion that supports the message.</p>
+          <p data-reveal>I work remotely with international creators and teams, shaping raw footage into videos that feel clear, polished, and easy to keep watching.</p>
+          <div class="about-principles" data-reveal><span>Story-led</span><span>Remote-ready</span><span>Detail-focused</span></div>
+          <h3 class="skills-heading" data-reveal>Core Software</h3><ul class="skills-grid" data-reveal><li class="skill-badge">DaVinci Resolve Studio</li><li class="skill-badge">Fusion 3D</li><li class="skill-badge">Adobe Premiere Pro</li><li class="skill-badge">After Effects</li></ul>
+          <h3 class="skills-heading" data-reveal>Key Specialties</h3><ul class="skills-grid" data-reveal><li class="skill-badge">Talking Head Videos</li><li class="skill-badge">Dynamic Subtitles</li><li class="skill-badge">Color Grading</li><li class="skill-badge">3D Motion Graphics</li><li class="skill-badge">Sound Design</li></ul>
+          <a href="#contact" class="btn btn-ghost magnetic" data-reveal data-cursor="hover"><span>Let’s work together</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="services workflow" id="process" aria-labelledby="process-title">
+      <div class="container"><div class="section-head"><p class="section-kicker" data-reveal>04 — Process</p><h2 class="section-title" id="process-title" data-reveal>A clear path from brief to delivery</h2></div>
+        <div class="services-grid">
+          <article class="service-card" data-reveal><span class="service-num">01</span><h3>Brief &amp; Direction</h3><p>We align on the audience, purpose, references, deliverables, and what success should feel like.</p></article>
+          <article class="service-card" data-reveal><span class="service-num">02</span><h3>Structure &amp; Rough Cut</h3><p>I shape the narrative and pacing first, so every visual decision supports a strong foundation.</p></article>
+          <article class="service-card" data-reveal><span class="service-num">03</span><h3>Motion, Sound &amp; Color</h3><p>Captions, graphics, sound design, and grading add clarity and a cohesive finish.</p></article>
+          <article class="service-card" data-reveal><span class="service-num">04</span><h3>Review &amp; Delivery</h3><p>Feedback stays organized, revisions stay focused, and final files arrive in the formats you need.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="client-expectations" id="expectations" aria-labelledby="expectations-title">
+      <div class="container"><div class="section-head"><p class="section-kicker" data-reveal>05 — Working Together</p><h2 class="section-title" id="expectations-title" data-reveal>What clients can expect</h2><p class="section-intro" data-reveal>Not borrowed testimonials—just the standards I bring to every collaboration.</p></div>
+        <div class="expectations-grid"><article data-reveal><span>01</span><h3>Clear communication</h3><p>Practical updates, direct questions, and no mystery around the next step.</p></article><article data-reveal><span>02</span><h3>Organized delivery</h3><p>Predictable versions, tidy exports, and files prepared for the platforms that matter.</p></article><article data-reveal><span>03</span><h3>Story-first decisions</h3><p>Effects serve the message. Rhythm, clarity, and audience attention come first.</p></article></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="container"><p class="section-kicker" data-reveal>06 — Contact</p><h2 class="contact-title" id="contact-title" data-reveal>Let’s bring your<br/><em>video ideas to life.</em></h2><a href="mailto:Nhatfreelancer.dv@gmail.com" class="contact-mail magnetic" data-cursor="hover" data-reveal>Nhatfreelancer.dv@gmail.com</a>
+        <div class="socials" data-reveal><a href="mailto:Nhatfreelancer.dv@gmail.com" data-cursor="hover">Email ↗</a><a href="https://zalo.me/your-zalo-number" target="_blank" rel="noopener" data-cursor="hover">Zalo ↗</a><a href="https://wa.me/84xxxxxxxxx" target="_blank" rel="noopener" data-cursor="hover">WhatsApp ↗</a><a href="https://github.com/nhat-editor" target="_blank" rel="noopener" data-cursor="hover">GitHub ↗</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 Nguyen Quang Nhat. All rights reserved.</span><a href="#home" data-cursor="hover">Back to top ↑</a></div></footer>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <button class="modal-close" type="button" aria-label="Close preview">✕</button><div class="modal-body" role="document"><div class="modal-video"><video id="modalVideo" controls playsinline preload="none"></video><iframe id="modalIframe" title="Project video" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><div class="modal-info"><h3 id="modalTitle"></h3></div></div>
   </div>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="home">
-    <div class="hero-bg">
-      <video autoplay muted loop playsinline preload="metadata" poster="https://picsum.photos/1920/1080?random=1">
-        <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-vignette"></div>
-    </div>
-
-    <div class="hero-content">
-      <p class="hero-kicker" data-reveal>Portfolio</p>
-      <h1 class="hero-title">
-        <span class="line"><span data-reveal>Nguyen</span></span>
-        <span class="line"><span data-reveal>Quang Nhat</span></span>
-      </h1>
-      <p class="hero-sub" data-reveal>
-        Video Editor &amp; Motion Graphic Designer — crafting clean, fast-paced
-        edits and visual storytelling that keeps viewers watching.
-      </p>
-      <div class="hero-cta" data-reveal>
-        <a href="#showreel" class="btn btn-primary magnetic" data-cursor="hover">
-          <span>Watch Showreel</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-        </a>
-        <a href="#contact" class="btn btn-ghost magnetic" data-cursor="hover">
-          <span>Get in Touch</span>
-          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-marquee">
-      <div class="marquee-track">
-        <span>Talking Head</span><span>·</span><span>Motion Graphics</span><span>·</span>
-        <span>Clean Edits</span><span>·</span><span>Color Grading</span><span>·</span>
-        <span>Sound Design</span><span>·</span><span>Dynamic Captions</span><span>·</span>
-        <span>Talking Head</span><span>·</span><span>Motion Graphics</span><span>·</span>
-        <span>Clean Edits</span><span>·</span><span>Color Grading</span><span>·</span>
-        <span>Sound Design</span><span>·</span><span>Dynamic Captions</span><span>·</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SHOWREEL ============ -->
-  <section class="showreel" id="showreel">
-    <div class="container">
-      <div class="section-head">
-        <p class="section-kicker" data-reveal>01 — Showreel</p>
-        <h2 class="section-title" data-reveal>Featured Reel</h2>
-      </div>
-
-      <div class="reel-wrap" data-reveal>
-        <div class="reel-poster">
-          <img src="https://picsum.photos/1600/900?random=2" alt="Showreel poster" />
-          <button class="reel-play" data-cursor="play" aria-label="Play showreel">
-            <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="39" stroke="currentColor" stroke-width="1" fill="none"/><path d="M32 26l22 14-22 14z" fill="currentColor"/></svg>
-          </button>
-        </div>
-        <div class="reel-video">
-          <!-- 👉 Replace with your own showreel YouTube/Vimeo ID -->
-         <!-- <iframe src="https://www.youtube.com/embed/BeYzqS5ig2o"
-                  title="Showreel" frameborder="0"
-                  allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe> -->
-              <iframe width="1331" height="749" src="https://www.youtube.com/embed/BeYzqS5ig2o" title="Video Editor | Showreel | Portfolio 2026" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-          
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ ABOUT + SKILLS ============ -->
-  <section class="about" id="about">
-    <div class="container about-grid">
-      <div class="about-img" data-reveal>
-        <img src="https://picsum.photos/800/1000?random=11" alt="Portrait of Nguyen Quang Nhat" />
-      </div>
-      <div class="about-text">
-        <p class="section-kicker" data-reveal>02 — About Me</p>
-        <h2 class="section-title" data-reveal>Story first,<br/>frames second.</h2>
-        <p data-reveal>
-          I'm <strong>Nguyen Quang Nhat</strong> — a video editor and motion graphic
-          designer with a passion for clean, fast-paced edits that respect the story.
-          I specialize in turning long-form talking head footage into engaging content
-          that holds attention from the first frame to the last.
-        </p>
-        <p data-reveal>
-          Whether it's a finance explainer, a SaaS product promo, or a short-form
-          Reel, I focus on rhythm, clarity, and visuals that feel effortless.
-        </p>
-
-        <div class="about-stats">
-          <div data-reveal><strong>150+</strong><span>Videos Delivered</span></div>
-          <div data-reveal><strong>40+</strong><span>Happy Clients</span></div>
-          <div data-reveal><strong>4+</strong><span>Years Experience</span></div>
-        </div>
-
-        <!-- Core software -->
-        <h3 class="skills-heading" data-reveal>Core Software</h3>
-        <ul class="skills-grid" data-reveal>
-          <li class="skill-badge">DaVinci Resolve Studio</li>
-          <li class="skill-badge">Fusion 3D</li>
-          <li class="skill-badge">Adobe Premiere Pro</li>
-          <li class="skill-badge">After Effects</li>
-        </ul>
-
-        <!-- Specialties -->
-        <h3 class="skills-heading" data-reveal>Key Specialties</h3>
-        <ul class="skills-grid" data-reveal>
-          <li class="skill-badge">Talking Head Videos</li>
-          <li class="skill-badge">Dynamic Subtitles</li>
-          <li class="skill-badge">Color Grading</li>
-          <li class="skill-badge">3D Motion Graphics</li>
-          <li class="skill-badge">Sound Design</li>
-        </ul>
-
-        <a href="#contact" class="btn btn-ghost magnetic" data-reveal data-cursor="hover" style="margin-top:1.5rem;">
-          <span>Let's work together</span>
-          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FEATURED PROJECTS ============ -->
-  <section class="work" id="work">
-    <div class="container">
-      <div class="section-head">
-        <p class="section-kicker" data-reveal>03 — Selected Works</p>
-        <h2 class="section-title" data-reveal>Featured Projects</h2>
-      </div>
-
-      <div class="work-grid" id="workGrid">
-
-        <!-- Card 1 -->
-        <article class="work-card" data-reveal data-cursor="hover">
-          <div class="work-thumb">
-            <img src="https://picsum.photos/800/1000?random=21" alt="Talking Head - Finance & Tech" loading="lazy" />
-            <div class="work-overlay">
-              <p class="work-cat">Talking Head · Finance &amp; Tech</p>
-              <h3 class="work-title">Finance &amp; Tech Explainer Series</h3>
-              <p class="work-year">2025</p>
-            </div>
-          </div>
-          <div class="work-body">
-            <p class="work-desc">Long-form talking head content transformed into crisp, easy-to-follow explainers with dynamic captions and b-roll overlays.</p>
-            <ul class="work-tags">
-              <li>DaVinci Resolve</li>
-              <li>Dynamic Captions</li>
-            </ul>
-            <button class="btn btn-ghost work-btn" data-video="https://www.youtube.com/embed/aqz-KE-bpKQ" data-title="Finance & Tech Explainer Series">
-              <span>Watch Video</span>
-              <svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-            </button>
-          </div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="work-card" data-reveal data-cursor="hover">
-          <div class="work-thumb">
-            <img src="https://picsum.photos/800/1000?random=22" alt="SaaS Product Promo" loading="lazy" />
-            <div class="work-overlay">
-              <p class="work-cat">Commercial · SaaS</p>
-              <h3 class="work-title">SaaS Product Promo</h3>
-              <p class="work-year">2025</p>
-            </div>
-          </div>
-          <div class="work-body">
-            <p class="work-desc">Full 3D motion graphics promo built in Fusion — product visualizations, transitions, and kinetic typography.</p>
-            <ul class="work-tags">
-              <li>Fusion 3D</li>
-              <li>Motion Graphics</li>
-            </ul>
-            <button class="btn btn-ghost work-btn" data-video="https://www.youtube.com/embed/aqz-KE-bpKQ" data-title="SaaS Product Promo">
-              <span>Watch Video</span>
-              <svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-            </button>
-          </div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="work-card" data-reveal data-cursor="hover">
-          <div class="work-thumb">
-            <img src="https://picsum.photos/1600/900?random=23" alt="Real Estate Travel Tour" loading="lazy" />
-            <div class="work-overlay">
-              <p class="work-cat">Travel · Real Estate</p>
-              <h3 class="work-title">Real Estate / Travel Tour</h3>
-              <p class="work-year">2024</p>
-            </div>
-          </div>
-          <div class="work-body">
-            <p class="work-desc">Cinematic tour film with rich color grading and custom sound design to evoke the atmosphere of each location.</p>
-            <ul class="work-tags">
-              <li>Color Grading</li>
-              <li>Sound Design</li>
-            </ul>
-            <button class="btn btn-ghost work-btn" data-video="https://www.youtube.com/embed/aqz-KE-bpKQ" data-title="Real Estate / Travel Tour">
-              <span>Watch Video</span>
-              <svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-            </button>
-          </div>
-        </article>
-
-        <!-- Card 4 -->
-        <article class="work-card" data-reveal data-cursor="hover">
-          <div class="work-thumb">
-            <img src="https://picsum.photos/800/1000?random=24" alt="Short-form Reels TikTok" loading="lazy" />
-            <div class="work-overlay">
-              <p class="work-cat">Short-form · Reels / TikTok</p>
-              <h3 class="work-title">Short-form Reels / TikTok</h3>
-              <p class="work-year">2024</p>
-            </div>
-          </div>
-          <div class="work-body">
-            <p class="work-desc">Fast-paced, engagement-focused vertical edits with punchy cuts, captions, and audio-driven pacing.</p>
-            <ul class="work-tags">
-              <li>Fast-paced</li>
-              <li>Engagement</li>
-            </ul>
-            <button class="btn btn-ghost work-btn" data-video="https://www.youtube.com/embed/aqz-KE-bpKQ" data-title="Short-form Reels / TikTok">
-              <span>Watch Video</span>
-              <svg width="14" height="14" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-            </button>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ WORKFLOW / PROCESS ============ -->
-  <section class="services workflow" id="process">
-    <div class="container">
-      <div class="section-head">
-        <p class="section-kicker" data-reveal>04 — Process</p>
-        <h2 class="section-title" data-reveal>How we work</h2>
-      </div>
-      <div class="services-grid">
-        <article class="service-card" data-reveal data-cursor="hover">
-          <span class="service-num">01</span>
-          <h3>Brief &amp; Strategy</h3>
-          <p>We align on goals, audience, references, and the story we want to tell — before touching a single clip.</p>
-        </article>
-        <article class="service-card" data-reveal data-cursor="hover">
-          <span class="service-num">02</span>
-          <h3>Rough Cut &amp; Pacing</h3>
-          <p>Structure, rhythm, and flow. I build the first edit so the narrative lands and the pacing feels natural.</p>
-        </article>
-        <article class="service-card" data-reveal data-cursor="hover">
-          <span class="service-num">03</span>
-          <h3>Motion &amp; Color Grading</h3>
-          <p>Graphics, captions, transitions, and color — adding polish that makes the video feel premium.</p>
-        </article>
-        <article class="service-card" data-reveal data-cursor="hover">
-          <span class="service-num">04</span>
-          <h3>Final Delivery &amp; Revisions</h3>
-          <p>Export in every format you need, with 2 free revision rounds to make sure you're 100% happy.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <p class="section-kicker" data-reveal>05 — Contact</p>
-      <h2 class="contact-title" data-reveal>
-        Let's bring your<br/><em>video ideas to life.</em>
-      </h2>
-
-      <a href="mailto:Nhatfreelancer.dv@gmail.com" class="contact-mail magnetic" data-cursor="hover" data-reveal>
-        Nhatfreelancer.dv@gmail.com
-      </a>
-
-      <div class="socials" data-reveal>
-        <a href="mailto:Nhatfreelancer.dv@gmail.com" data-cursor="hover">Email ↗</a>
-        <a href="https://zalo.me/your-zalo-number" target="_blank" rel="noopener" data-cursor="hover">Zalo ↗</a>
-        <a href="https://wa.me/84xxxxxxxxx" target="_blank" rel="noopener" data-cursor="hover">WhatsApp ↗</a>
-        <a href="https://github.com/nhat-editor" target="_blank" rel="noopener" data-cursor="hover">GitHub ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>© 2026 Nguyen Quang Nhat. All rights reserved.</span>
-      <a href="#home" data-cursor="hover">Back to top ↑</a>
-    </div>
-  </footer>
-
-  <!-- Project modal -->
-  <div class="modal" id="modal">
-    <button class="modal-close" aria-label="Close">✕</button>
-    <div class="modal-body">
-      <div class="modal-video">
-        <iframe id="modalIframe" src="" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="modal-info">
-        <h3 id="modalTitle"></h3>
-      </div>
-    </div>
-  </div>
-
-  
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script defer src="script.js"></script>
 </body>
 </html>

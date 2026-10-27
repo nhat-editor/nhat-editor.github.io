@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Nguyen Quang Nhat portfolio social preview</title>
+  <desc id="desc">Video editor and motion designer title on a dark green cinematic background.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#020403"/><stop offset="1" stop-color="#12372a"/></linearGradient>
+    <radialGradient id="g"><stop stop-color="#22c79a" stop-opacity=".5"/><stop offset="1" stop-color="#22c79a" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="80" r="420" fill="url(#g)"/>
+  <text x="76" y="95" fill="#8fe3b0" font-family="Arial,sans-serif" font-size="22" letter-spacing="7">PORTFOLIO · 2026</text>
+  <text x="72" y="250" fill="#e2f0ea" font-family="Georgia,serif" font-size="88">Nguyen Quang Nhat</text>
+  <text x="75" y="345" fill="#22c79a" font-family="Georgia,serif" font-size="66" font-style="italic">Video Editor &amp; Motion Designer</text>
+  <line x1="78" y1="425" x2="760" y2="425" stroke="#22c79a" stroke-width="3"/>
+  <text x="76" y="490" fill="#86a898" font-family="Arial,sans-serif" font-size="24" letter-spacing="4">TALKING HEAD · MOTION GRAPHICS · CLEAN EDITS</text>
+  <g transform="translate(995 460)"><circle r="74" fill="none" stroke="#8fe3b0" stroke-opacity=".5"/><path d="M-18-28l52 28-52 28z" fill="#22c79a"/></g>
+</svg>

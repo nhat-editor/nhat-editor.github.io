@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Social campaign concept frame</title>
+  <desc id="desc">Vertical edit frames and kinetic captions arranged in a fast-paced grid.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#020403"/><stop offset="1" stop-color="#123729"/></linearGradient></defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity=".35" fill="none" stroke="#22c79a"><circle cx="1330" cy="150" r="270"/><circle cx="1330" cy="150" r="190"/><circle cx="1330" cy="150" r="110"/></g>
+  <g transform="translate(110 112)">
+    <text fill="#8fe3b0" font-family="Arial,sans-serif" font-size="24" letter-spacing="8">CONCEPT 04 · SOCIAL CAMPAIGN</text>
+    <text y="112" fill="#e2f0ea" font-family="Georgia,serif" font-size="100">Stop the scroll.</text>
+    <text y="215" fill="#22c79a" font-family="Georgia,serif" font-size="100" font-style="italic">Keep the story.</text>
+  </g>
+  <g transform="translate(160 450)">
+    <g transform="rotate(-5 140 180)"><rect width="280" height="360" rx="26" fill="#0d1a15" stroke="#22c79a" stroke-opacity=".5"/><rect x="28" y="35" width="224" height="190" rx="15" fill="#22c79a" opacity=".14"/><rect x="28" y="260" width="160" height="18" rx="9" fill="#e2f0ea" opacity=".8"/><rect x="28" y="294" width="205" height="12" rx="6" fill="#86a898" opacity=".55"/></g>
+    <g transform="translate(370 -55)"><rect width="280" height="360" rx="26" fill="#11251d" stroke="#8fe3b0" stroke-opacity=".45"/><text x="140" y="165" text-anchor="middle" fill="#22c79a" font-family="Arial,sans-serif" font-size="66" font-weight="800">3.2.1</text><text x="140" y="220" text-anchor="middle" fill="#e2f0ea" font-family="Arial,sans-serif" font-size="24" letter-spacing="5">HOOK</text></g>
+    <g transform="translate(740 12) rotate(5 140 180)"><rect width="280" height="360" rx="26" fill="#0d1a15" stroke="#22c79a" stroke-opacity=".5"/><path d="M38 226l55-72 48 38 87-110" fill="none" stroke="#22c79a" stroke-width="12"/><rect x="38" y="268" width="204" height="18" rx="9" fill="#e2f0ea" opacity=".75"/></g>
+  </g>
+</svg>
