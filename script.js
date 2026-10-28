@@ -15,6 +15,14 @@ function trackEvent(name, parameters = {}) {
 const translations = {
   en: {
 
+    "work.anim1.alt": "DaVinci Resolve Animations",
+    "work.anim1.title": "DaVinci Resolve Animations",
+    "work.anim1.brief": "Create dynamic animations using DaVinci Resolve.",
+    "work.anim1.approach": "Fluid motion, clean typography, and precise keyframing.",
+    "work.anim1.outcome": "Deliver a polished, high-energy visual experience.",
+    "work.anim1.buttonTitle": "DaVinci Resolve Animations",
+    "work.watchVideo": "Watch Video",
+
     "work.video6.alt": "Video Talking Head",
     "work.video6.category": "Talking Head · DaVinci Resolve",
     "work.video6.title": "Video Talking Head",
@@ -140,6 +148,14 @@ const translations = {
   },
   vi: {
 
+    "work.anim1.alt": "Đồ họa chuyển động DaVinci Resolve",
+    "work.anim1.title": "Đồ họa chuyển động DaVinci Resolve",
+    "work.anim1.brief": "Tạo các chuyển động linh hoạt bằng DaVinci Resolve.",
+    "work.anim1.approach": "Chuyển động mượt mà, typography gọn gàng và keyframe chính xác.",
+    "work.anim1.outcome": "Mang lại trải nghiệm hình ảnh chỉn chu và đầy năng lượng.",
+    "work.anim1.buttonTitle": "Đồ họa chuyển động DaVinci Resolve",
+    "work.watchVideo": "Xem Video",
+
     "work.video6.alt": "Video Talking Head",
     "work.video6.category": "Talking Head · DaVinci Resolve",
     "work.video6.title": "Video Talking Head",
@@ -247,7 +263,7 @@ const translations = {
     "work.property.buttonTitle": "Không gian trở thành cảm xúc — Bản xem trước ý tưởng",
     "work.property.category": "Bất động sản · Câu chuyện điện ảnh",
     "work.property.outcome": "Giúp khách hàng tiềm năng hình dung trọn vẹn trải nghiệm khi sống trong không gian đó.",
-    "work.property.title": "Không gian trở thành cảm xúc", 
+    "work.property.title": "Không gian trở thành cảm xúc",
     "work.social.alt": "Ý tưởng chiến dịch mạng xã hội dọc với tiết tấu nhanh",
     "work.social.approach": "Cấu trúc tập trung vào hook, cắt cảnh punch-in theo nhịp, phụ đề dễ đọc và các nhịp đồ họa dạng mô-đun.",
     "work.social.brief": "Xây dựng hệ thống video ngắn có thể lặp lại với phần mở đầu mạnh và ngôn ngữ hình ảnh dễ nhận diện.",
