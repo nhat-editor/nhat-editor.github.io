@@ -117,6 +117,7 @@ test("both language dictionaries cover every markup key", () => {
     }
   }
   assert.equal(translations.vi["work.disclosure"], "Dự án ý tưởng · Nội dung minh họa");
+  assert.equal(translations.vi["footer.copyright"], "© 2026 Nguyen Quang Nhat. Bảo lưu mọi quyền.");
   assert.match(script, /const LANGUAGE_STORAGE_KEY = "portfolio-language";/);
 });
 

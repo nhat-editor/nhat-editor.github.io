@@ -101,6 +101,28 @@ test("skip link moves keyboard focus to the main landmark", async () => {
   assert.equal(await evaluate("document.activeElement.id"), "main-content");
 });
 
+test("English portfolio remains visible when JavaScript is disabled", async () => {
+  await send("Emulation.setScriptExecutionDisabled", { value: true });
+  try {
+    await reloadPage();
+    const fallback = JSON.parse(await evaluate(`JSON.stringify({
+      language: document.documentElement.lang,
+      javascriptClass: document.documentElement.classList.contains('js'),
+      preloaderDisplay: getComputedStyle(document.querySelector('.preloader')).display,
+      mainVisibility: getComputedStyle(document.querySelector('main')).visibility,
+      hero: document.querySelector('.hero-sub').textContent
+    })`));
+    assert.equal(fallback.language, "en");
+    assert.equal(fallback.javascriptClass, false);
+    assert.equal(fallback.preloaderDisplay, "none");
+    assert.equal(fallback.mainVisibility, "visible");
+    assert.match(fallback.hero, /Video Editor/);
+  } finally {
+    await send("Emulation.setScriptExecutionDisabled", { value: false });
+    await reloadPage();
+  }
+});
+
 test("language switch defaults to English, switches by keyboard, and persists Vietnamese", async () => {
   await evaluate("localStorage.clear(); true");
   await reloadPage();
@@ -179,6 +201,20 @@ test("showreel iframe is created only after activation", async () => {
   await evaluate("document.querySelector('.reel-play').click(); true");
   await waitFor(() => evaluate("Boolean(document.querySelector('.reel-video iframe'))"));
   assert.match(await evaluate("document.querySelector('.reel-video iframe').src"), /BeYzqS5ig2o/);
+});
+
+test("existing showreel iframe title follows later language changes", async () => {
+  await evaluate("if (!document.querySelector('.reel-video iframe')) document.querySelector('.reel-play').click(); true");
+  await waitFor(() => evaluate("Boolean(document.querySelector('.reel-video iframe'))"));
+  assert.equal(await evaluate("document.querySelector('.reel-video iframe').title"), "Nguyen Quang Nhat — video editing showreel");
+  await evaluate("document.querySelector('[data-language=\"vi\"]').click(); true");
+  assert.equal(await evaluate("document.querySelector('.reel-video iframe').title"), "Showreel dựng phim của Nguyen Quang Nhat");
+  await evaluate(`(() => {
+    document.querySelector('.reel-video iframe')?.remove();
+    document.querySelector('.reel-poster').classList.remove('hidden');
+    document.querySelector('[data-language="en"]').click();
+    localStorage.clear();
+  })()`);
 });
 
 test("language selection updates dynamic menu, showreel, and modal labels", async () => {

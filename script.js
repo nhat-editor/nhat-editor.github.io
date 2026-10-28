@@ -168,7 +168,7 @@ const translations = {
     "expectations.story.body": "Hiệu ứng phục vụ thông điệp. Nhịp điệu, sự rõ ràng và sự chú ý của khán giả luôn được ưu tiên.",
     "expectations.story.title": "Quyết định dựa trên câu chuyện",
     "expectations.title": "Điều khách hàng có thể mong đợi",
-    "footer.copyright": "© 2026 Nguyen Quang Nhat. Đã đăng ký bản quyền.",
+    "footer.copyright": "© 2026 Nguyen Quang Nhat. Bảo lưu mọi quyền.",
     "footer.top": "Về đầu trang ↑",
     "hero.kicker": "Portfolio · Sẵn sàng hợp tác toàn cầu",
     "hero.specialtiesLabel": "Chuyên môn dựng phim",
@@ -430,6 +430,7 @@ function loadShowreel() {
   const source = container.dataset.showreelSrc;
   iframe.src = `${source}${source.includes("?") ? "&" : "?"}autoplay=1&rel=0`;
   iframe.title = translate("showreel.iframeTitle");
+  iframe.dataset.i18nAttr = "title:showreel.iframeTitle";
   iframe.allow = "autoplay; encrypted-media; picture-in-picture; web-share";
   iframe.referrerPolicy = "strict-origin-when-cross-origin";
   iframe.allowFullscreen = true;

@@ -122,9 +122,10 @@ button { background: none; border: none; color: inherit; font: inherit; cursor: 
 /* ============ PRELOADER ============ */
 .preloader {
   position: fixed; inset: 0; background: var(--bg-base); z-index: 10000;
-  display: flex; align-items: center; justify-content: center;
+  display: none; align-items: center; justify-content: center;
   transition: opacity .6s ease, visibility .6s ease;
 }
+.js .preloader { display: flex; }
 .preloader.done { opacity: 0; visibility: hidden; }
 .preloader-inner { text-align: center; }
 .preloader-num { font-family: var(--serif); font-size: clamp(3rem, 10vw, 7rem); display: block; line-height: 1; }
