@@ -55,6 +55,45 @@ test("about portrait preserves the source image colors", () => {
   assert.doesNotMatch(rule, /filter\s*:|hue-rotate|sepia|grayscale/);
 });
 
+test("language controls are available in desktop and mobile navigation", () => {
+  assert.equal((html.match(/class="language-switch(?: [^"]+)?"/g) ?? []).length, 2);
+  assert.equal((html.match(/type="button" data-language="en" aria-pressed="true"/g) ?? []).length, 2);
+  assert.equal((html.match(/type="button" data-language="vi" aria-pressed="false"/g) ?? []).length, 2);
+  assert.equal((html.match(/role="group"[^>]+data-i18n-attr="aria-label:language\.label"/g) ?? []).length, 2);
+});
+
+test("translation markup preserves English as the complete baseline", () => {
+  const essentialText = {
+    "skip.content": "Skip to content",
+    "nav.showreel": "Showreel",
+    "nav.work": "Work",
+    "nav.about": "About",
+    "nav.process": "Process",
+    "nav.why": "Why Me",
+    "nav.contact": "Contact",
+    "hero.kicker": "Portfolio · Available worldwide",
+    "hero.watch": "Watch Showreel",
+    "hero.start": "Start a Project",
+    "showreel.title": "Featured Showreel",
+    "work.title": "Editing Scenarios",
+    "work.disclosure": "Concept Project · Illustrative Content",
+    "work.previewAction": "View Motion Preview",
+    "about.title.first": "Story first,",
+    "process.title": "A clear path from brief to delivery",
+    "expectations.title": "What clients can expect",
+    "contact.title.first": "Let’s bring your",
+    "footer.top": "Back to top ↑",
+  };
+
+  for (const [key, copy] of Object.entries(essentialText)) {
+    assert.match(html, new RegExp(`data-i18n="${key}"[^>]*>${copy.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}`));
+  }
+
+  for (const mapping of ["aria-label:", "alt:", "title:", "data-title:"]) {
+    assert.match(html, new RegExp(`data-i18n-attr="[^"]*${mapping}`));
+  }
+});
+
 test("four honest concept projects use only local poster and preview media", () => {
   assert.equal((html.match(/Concept Project · Illustrative Content/g) ?? []).length, 4);
   assert.equal((html.match(/class="work-card"/g) ?? []).length, 4);
