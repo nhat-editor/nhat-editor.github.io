@@ -36,7 +36,7 @@ const translations = {
     "contact.email": "Email ↗",
     "contact.kicker": "06 — Contact",
     "contact.title.first": "Let’s bring your",
-    "contact.title.second": "video ideas to life.",
+    "contact.title.second": "video ideas to life",
     "expectations.communication.body": "Practical updates, direct questions, and no mystery around the next step.",
     "expectations.communication.title": "Clear communication",
     "expectations.delivery.body": "Predictable versions, tidy exports, and files prepared for the platforms that matter.",
@@ -135,7 +135,7 @@ const translations = {
     "work.tag.visualRhythm": "Visual Rhythm",
     "work.title": "Editing Scenarios",
   },
-    vi: {
+  vi: {
     "about.cta": "Cùng hợp tác nhé",
     "about.intro.prefix": "Tôi là",
     "about.intro.suffix": ", một video editor và motion designer tập trung vào kể chuyện mạch lạc, nhịp dựng có chủ đích và các chuyển động tôn lên thông điệp.",
@@ -158,7 +158,7 @@ const translations = {
     "contact.email": "Email ↗",
     "contact.kicker": "06 — Liên hệ",
     "contact.title.first": "Cùng biến ý tưởng",
-    "contact.title.second": "thành thước phim.",
+    "contact.title.second": "thành thước phim",
     "expectations.communication.body": "Cập nhật tiến độ thực tế, trao đổi thẳng thắn và luôn minh bạch về các bước tiếp theo.",
     "expectations.communication.title": "Trao đổi rõ ràng",
     "expectations.delivery.body": "Các phiên bản nhất quán, file xuất gọn gàng và đúng chuẩn cho từng nền tảng.",
@@ -305,7 +305,7 @@ function applyLanguage(language, { persist = true } = {}) {
   if (persist) {
     try {
       window.localStorage.setItem(LANGUAGE_STORAGE_KEY, currentLanguage);
-    } catch {}
+    } catch { }
   }
 }
 

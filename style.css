@@ -590,6 +590,28 @@ button {
   color: var(--ink-dim);
 }
 
+/* Hiệu ứng cho dải chữ chạy (Marquee) */
+.marquee-track span {
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+/* 1. Khi di chuột vào -> Dừng chữ chạy lại */
+.hero-marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* 2. Khi di chuột vào -> Chữ sáng rực lên */
+.hero-marquee:hover .marquee-track span:not(:nth-child(2n)) {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px var(--accent-light);
+}
+
+/* 3. Các dấu chấm (·) cũng đổi sang màu Vàng kim cho đồng bộ */
+.hero-marquee:hover .marquee-track span:nth-child(2n) {
+  color: var(--accent-gold);
+  text-shadow: 0 0 15px var(--accent-gold);
+}
+
 .marquee-track span:nth-child(4n) {
   color: var(--accent-gold);
 }
