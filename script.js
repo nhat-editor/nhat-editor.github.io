@@ -14,6 +14,16 @@ function trackEvent(name, parameters = {}) {
 /* ---------- Language ---------- */
 const translations = {
   en: {
+
+    "work.video6.alt": "Video Talking Head",
+    "work.video6.category": "Talking Head · DaVinci Resolve",
+    "work.video6.title": "Video Talking Head",
+    "work.video6.brief": "Turn raw footage into a clean, engaging talking head video.",
+    "work.video6.approach": "Tight pacing, dynamic captions, and smooth transitions.",
+    "work.video6.outcome": "Keep the viewer engaged from start to finish.",
+    "work.video6.buttonTitle": "Video Talking Head",
+    "work.watchVideo": "Watch Video",
+
     "about.cta": "Let’s work together",
     "about.intro.prefix": "I’m",
     "about.intro.suffix": ", a video editor and motion designer focused on clean storytelling, intentional pacing, and motion that supports the message.",
@@ -136,6 +146,16 @@ const translations = {
     "work.title": "Editing Scenarios",
   },
   vi: {
+
+    "work.video6.alt": "Video Talking Head",
+    "work.video6.category": "Talking Head · DaVinci Resolve",
+    "work.video6.title": "Video Talking Head",
+    "work.video6.brief": "Biến cảnh quay thô thành video talking head rõ ràng, cuốn hút.",
+    "work.video6.approach": "Nhịp dựng chặt chẽ, phụ đề động và chuyển cảnh mượt mà.",
+    "work.video6.outcome": "Giữ chân người xem từ đầu đến cuối video.",
+    "work.video6.buttonTitle": "Video Talking Head",
+    "work.watchVideo": "Xem Video",
+
     "about.cta": "Cùng hợp tác nhé",
     "about.intro.prefix": "Tôi là",
     "about.intro.suffix": ", một video editor và motion designer tập trung vào kể chuyện mạch lạc, nhịp dựng có chủ đích và các chuyển động tôn lên thông điệp.",
