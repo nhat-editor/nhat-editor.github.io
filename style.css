@@ -94,8 +94,11 @@ button {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background: linear-gradient(135deg, #020302 0%, #050806 100%);
-  /* Nền tối cơ bản */
+  /* Kết hợp ánh sáng xanh lục bảo và ánh sáng cam đất */
+  background:
+    radial-gradient(circle at 15% 20%, rgba(34, 199, 154, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(229, 184, 105, 0.06), transparent 40%),
+    linear-gradient(135deg, #020302 0%, #050806 100%);
 }
 
 /* Cục sáng xanh thứ nhất */
@@ -239,7 +242,7 @@ button {
 .preloader-bar {
   height: 100%;
   width: 0;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--accent-gold));
   transition: width .1s linear;
 }
 
@@ -507,7 +510,8 @@ button {
 .hero-title .line:nth-child(2) {
   padding-left: clamp(2rem, 12vw, 10rem);
   font-style: italic;
-  color: var(--accent-gold); /* Đổi var(--accent) thành var(--accent-gold) */
+  color: var(--accent-gold);
+  /* Đổi var(--accent) thành var(--accent-gold) */
 }
 
 .hero-sub {
@@ -547,7 +551,8 @@ button {
 .btn-primary:hover {
   background: var(--accent-light);
   transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(143, 227, 176, 0.5);
+  /* Đổ bóng 2 lớp: Xanh và Vàng */
+  box-shadow: 0 0 20px var(--accent-glow), 0 0 40px rgba(229, 184, 105, 0.2);
 }
 
 .btn-ghost {
@@ -585,8 +590,8 @@ button {
   color: var(--ink-dim);
 }
 
-.marquee-track span:not(:nth-child(2n)) {
-  color: var(--accent);
+.marquee-track span:nth-child(4n) {
+  color: var(--accent-gold);
 }
 
 @keyframes scroll {
@@ -614,6 +619,10 @@ button {
   font-size: clamp(2.5rem, 6vw, 5rem);
   line-height: 1;
   letter-spacing: -0.03em;
+  /* Hiệu ứng chuyển màu */
+  background: linear-gradient(135deg, var(--ink) 30%, var(--accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* ============ SHOWREEL ============ */
@@ -706,8 +715,13 @@ button {
 
 .work-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--accent-glow);
-  border-color: rgba(143, 227, 176, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border-color: transparent;
+  /* Ẩn viền cũ */
+  background:
+    linear-gradient(var(--bg-glass), var(--bg-glass)) padding-box,
+    linear-gradient(135deg, var(--accent), var(--accent-gold)) border-box;
+  border: 1px solid transparent;
 }
 
 .work-card:nth-child(3n) {
@@ -724,11 +738,13 @@ button {
   aspect-ratio: 21 / 9;
 }
 
-.work-thumb img { 
-  width: 100%; height: 100%; object-fit: cover; 
-  transition: transform .8s var(--ease), filter .5s; 
+.work-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease), filter .5s;
   /* Thêm bộ lọc màu nhẹ */
-  filter: contrast(1.1) saturate(1.2); 
+  filter: contrast(1.1) saturate(1.2);
 }
 
 .work-card:hover .work-thumb img {
@@ -798,7 +814,8 @@ button {
   font-size: .7rem;
   letter-spacing: .15em;
   text-transform: uppercase;
-  color: var(--accent-gold); /* Đổi thành màu vàng */
+  color: var(--accent-gold);
+  /* Đổi thành màu vàng */
   padding: .3rem .7rem;
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -1004,10 +1021,13 @@ button {
 
 .service-num {
   font-family: var(--serif);
-  font-size: 1rem;
-  color: var(--accent);
+  font-size: 1.2rem;
   display: block;
   margin-bottom: 2rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
 
 .service-card h3 {
@@ -1050,7 +1070,8 @@ button {
 
 .contact-title em {
   font-style: italic;
-  color: var(--accent-gold); /* Đổi thành màu vàng */
+  color: var(--accent-gold);
+  /* Đổi thành màu vàng */
   text-shadow: 0 0 30px var(--accent-glow);
 }
 
