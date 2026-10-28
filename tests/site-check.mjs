@@ -48,6 +48,13 @@ test("selected work follows the real showreel and precedes the biography", () =>
   assert.ok(showreel > -1 && showreel < work && work < about);
 });
 
+test("about portrait preserves the source image colors", () => {
+  const rule = stylesheet.match(/\.about-img img\s*\{([^}]+)\}/)?.[1] ?? "";
+
+  assert.match(rule, /object-fit:\s*cover/);
+  assert.doesNotMatch(rule, /filter\s*:|hue-rotate|sepia|grayscale/);
+});
+
 test("four honest concept projects use only local poster and preview media", () => {
   assert.equal((html.match(/Concept Project · Illustrative Content/g) ?? []).length, 4);
   assert.equal((html.match(/class="work-card"/g) ?? []).length, 4);
