@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { readFileSync, statSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
@@ -54,6 +54,16 @@ test("about portrait preserves the source image colors", () => {
 
   assert.match(rule, /object-fit:\s*cover/);
   assert.doesNotMatch(rule, /filter\s*:|hue-rotate|sepia|grayscale/);
+});
+
+test("optimized portrait is a compact WebP used everywhere", () => {
+  const portrait = "assets/avatar.webp";
+  assert.equal(existsSync(portrait), true, `${portrait} should exist`);
+  assert.equal(execFileSync("identify", ["-format", "%m %wx%h", portrait], { encoding: "utf8" }), "WEBP 1200x1440");
+  assert.ok(statSync(portrait).size >= 10_000 && statSync(portrait).size <= 100_000);
+  assert.match(html, /"image": "https:\/\/nhat-editor\.github\.io\/assets\/avatar\.webp"/);
+  assert.match(html, /<img src="assets\/avatar\.webp"[^>]+width="1200"[^>]+height="1440"[^>]+loading="lazy"[^>]+decoding="async"/);
+  assert.doesNotMatch(`${html}\n${stylesheet}\n${script}`, /assets\/avatar\.png/);
 });
 
 test("language controls are available in desktop and mobile navigation", () => {

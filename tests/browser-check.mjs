@@ -123,6 +123,21 @@ test("English portfolio remains visible when JavaScript is disabled", async () =
   }
 });
 
+test("optimized portrait loads at its intrinsic size without a color filter", async () => {
+  await evaluate("document.querySelector('.about-img img').scrollIntoView(); true");
+  await waitFor(() => evaluate("document.querySelector('.about-img img').complete && document.querySelector('.about-img img').naturalWidth > 0"));
+  const portrait = JSON.parse(await evaluate(`JSON.stringify({
+    naturalWidth: document.querySelector('.about-img img').naturalWidth,
+    naturalHeight: document.querySelector('.about-img img').naturalHeight,
+    currentSrc: document.querySelector('.about-img img').currentSrc,
+    filter: getComputedStyle(document.querySelector('.about-img img')).filter
+  })`));
+  assert.equal(portrait.naturalWidth, 1200);
+  assert.equal(portrait.naturalHeight, 1440);
+  assert.match(portrait.currentSrc, /\/assets\/avatar\.webp$/);
+  assert.equal(portrait.filter, "none");
+});
+
 test("language switch defaults to English, switches by keyboard, and persists Vietnamese", async () => {
   await evaluate("localStorage.clear(); true");
   await reloadPage();
