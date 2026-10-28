@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { readFileSync, statSync } from "node:fs";
 import test from "node:test";
+import { runInNewContext } from "node:vm";
 
 const conceptSlugs = [
   "finance-explainer",
@@ -92,6 +93,31 @@ test("translation markup preserves English as the complete baseline", () => {
   for (const mapping of ["aria-label:", "alt:", "title:", "data-title:"]) {
     assert.match(html, new RegExp(`data-i18n-attr="[^"]*${mapping}`));
   }
+});
+
+test("both language dictionaries cover every markup key", () => {
+  const textKeys = [...html.matchAll(/data-i18n="([^"]+)"/g)].map((match) => match[1]);
+  const attributeKeys = [...html.matchAll(/data-i18n-attr="([^"]+)"/g)].flatMap((match) => (
+    match[1].split(";").map((mapping) => mapping.slice(mapping.indexOf(":") + 1))
+  ));
+  const keys = new Set([...textKeys, ...attributeKeys]);
+  const prefix = "const translations = ";
+  const start = script.indexOf(prefix);
+  const end = script.indexOf("\n\nconst SUPPORTED_LANGUAGES", start);
+
+  assert.notEqual(start, -1, "script should define translations");
+  assert.notEqual(end, -1, "translation dictionary should end before supported languages");
+  const literal = script.slice(start + prefix.length, end).trim().replace(/;$/, "");
+  const translations = runInNewContext(`(${literal})`);
+
+  for (const language of ["en", "vi"]) {
+    for (const key of keys) {
+      assert.equal(typeof translations[language][key], "string", `${language}.${key} should exist`);
+      assert.ok(translations[language][key].length > 0, `${language}.${key} should not be empty`);
+    }
+  }
+  assert.equal(translations.vi["work.disclosure"], "Dự án ý tưởng · Nội dung minh họa");
+  assert.match(script, /const LANGUAGE_STORAGE_KEY = "portfolio-language";/);
 });
 
 test("four honest concept projects use only local poster and preview media", () => {

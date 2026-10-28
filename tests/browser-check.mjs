@@ -44,6 +44,11 @@ const evaluate = async (expression) => {
   return response.result.value;
 };
 
+const reloadPage = async () => {
+  await send("Page.reload", { ignoreCache: true });
+  await waitFor(() => evaluate("document.readyState === 'complete'"));
+};
+
 before(async () => {
   mkdirSync(`${tempRoot}/config`, { recursive: true });
   mkdirSync(`${tempRoot}/cache`, { recursive: true });
@@ -96,11 +101,118 @@ test("skip link moves keyboard focus to the main landmark", async () => {
   assert.equal(await evaluate("document.activeElement.id"), "main-content");
 });
 
+test("language switch defaults to English, switches by keyboard, and persists Vietnamese", async () => {
+  await evaluate("localStorage.clear(); true");
+  await reloadPage();
+  assert.equal(await evaluate("document.documentElement.lang"), "en");
+  assert.match(await evaluate("document.querySelector('[data-i18n=\"hero.kicker\"]').textContent"), /Available worldwide/);
+
+  await evaluate(`(() => {
+    window.__languageKeyEvents = [];
+    const button = document.querySelector('.language-switch--desktop [data-language="vi"]');
+    button.addEventListener('keydown', (event) => window.__languageKeyEvents.push('keydown:' + event.key), { once: true });
+    button.addEventListener('keyup', (event) => window.__languageKeyEvents.push('keyup:' + event.key), { once: true });
+    button.addEventListener('click', () => window.__languageKeyEvents.push('click'), { once: true });
+    button.focus();
+  })()`);
+  assert.equal(await evaluate("document.activeElement.dataset.language"), "vi");
+  await send("Input.dispatchKeyEvent", {
+    type: "keyDown", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13,
+    text: "\r", unmodifiedText: "\r",
+  });
+  await send("Input.dispatchKeyEvent", { type: "keyUp", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13 });
+  const keyEvents = await evaluate("JSON.stringify(window.__languageKeyEvents)");
+  assert.deepEqual(JSON.parse(keyEvents), ["keydown:Enter", "click", "keyup:Enter"]);
+  await waitFor(() => evaluate("document.documentElement.lang === 'vi'"));
+
+  const translated = JSON.parse(await evaluate(`JSON.stringify({
+    hero: document.querySelector('[data-i18n="hero.kicker"]').textContent,
+    work: document.querySelector('[data-i18n="work.title"]').textContent,
+    disclosure: document.querySelector('[data-i18n="work.disclosure"]').textContent,
+    action: document.querySelector('[data-i18n="work.previewAction"]').textContent,
+    navLabel: document.querySelector('.nav-links').getAttribute('aria-label'),
+    viPressed: [...document.querySelectorAll('[data-language="vi"]')].every((button) => button.getAttribute('aria-pressed') === 'true'),
+    enReleased: [...document.querySelectorAll('[data-language="en"]')].every((button) => button.getAttribute('aria-pressed') === 'false')
+  })`));
+  assert.equal(translated.hero, "Portfolio · Sẵn sàng hợp tác toàn cầu");
+  assert.equal(translated.work, "Các tình huống dựng phim");
+  assert.equal(translated.disclosure, "Dự án ý tưởng · Nội dung minh họa");
+  assert.equal(translated.action, "Xem bản xem trước");
+  assert.equal(translated.navLabel, "Điều hướng chính");
+  assert.equal(translated.viPressed && translated.enReleased, true);
+
+  await reloadPage();
+  assert.equal(await evaluate("document.documentElement.lang"), "vi");
+  assert.equal(await evaluate("document.querySelector('[data-i18n=\"work.disclosure\"]').textContent"), "Dự án ý tưởng · Nội dung minh họa");
+
+  await evaluate("document.querySelector('[data-language=\"en\"]').click(); localStorage.clear(); true");
+  await reloadPage();
+});
+
+test("language controller rejects unsupported saved values and survives blocked storage", async () => {
+  await evaluate("localStorage.setItem('portfolio-language', 'fr'); true");
+  await reloadPage();
+  assert.equal(await evaluate("document.documentElement.lang"), "en");
+  await evaluate("localStorage.clear(); true");
+
+  const injection = await send("Page.addScriptToEvaluateOnNewDocument", {
+    source: `
+      Object.defineProperty(Storage.prototype, 'getItem', { configurable: true, value() { throw new Error('blocked'); } });
+      Object.defineProperty(Storage.prototype, 'setItem', { configurable: true, value() { throw new Error('blocked'); } });
+    `,
+  });
+  try {
+    await reloadPage();
+    assert.equal(await evaluate("document.documentElement.lang"), "en");
+    await evaluate("document.querySelector('[data-language=\"vi\"]').click(); true");
+    assert.equal(await evaluate("document.documentElement.lang"), "vi");
+    assert.equal(await evaluate("document.querySelector('[data-i18n=\"work.disclosure\"]').textContent"), "Dự án ý tưởng · Nội dung minh họa");
+  } finally {
+    await send("Page.removeScriptToEvaluateOnNewDocument", { identifier: injection.identifier });
+    await reloadPage();
+    await evaluate("localStorage.clear(); true");
+  }
+});
+
 test("showreel iframe is created only after activation", async () => {
   assert.equal(await evaluate("Boolean(document.querySelector('.reel-video iframe'))"), false);
   await evaluate("document.querySelector('.reel-play').click(); true");
   await waitFor(() => evaluate("Boolean(document.querySelector('.reel-video iframe'))"));
   assert.match(await evaluate("document.querySelector('.reel-video iframe').src"), /BeYzqS5ig2o/);
+});
+
+test("language selection updates dynamic menu, showreel, and modal labels", async () => {
+  await evaluate(`(() => {
+    document.querySelector('[data-language="vi"]').click();
+    const existingFrame = document.querySelector('.reel-video iframe');
+    if (existingFrame) existingFrame.remove();
+    document.querySelector('.reel-poster').classList.remove('hidden');
+  })()`);
+  assert.equal(await evaluate("document.querySelector('.nav-toggle').getAttribute('aria-label')"), "Mở menu");
+  await evaluate("document.querySelector('.nav-toggle').click(); true");
+  assert.equal(await evaluate("document.querySelector('.nav-toggle').getAttribute('aria-label')"), "Đóng menu");
+  await evaluate("document.querySelector('.nav-toggle').click(); document.querySelector('.reel-play').click(); true");
+  await waitFor(() => evaluate("Boolean(document.querySelector('.reel-video iframe'))"));
+  assert.equal(await evaluate("document.querySelector('.reel-video iframe').title"), "Showreel dựng phim của Nguyen Quang Nhat");
+
+  await evaluate("openModal(document.querySelector('.work-btn').dataset.video, '', document.querySelector('.work-btn')); true");
+  assert.equal(await evaluate("document.querySelector('#modalTitle').textContent"), "Xem trước dự án");
+  await evaluate(`(() => {
+    closeModal();
+    document.querySelector('.reel-video iframe')?.remove();
+    document.querySelector('.reel-poster').classList.remove('hidden');
+    document.querySelectorAll('.work-card').forEach((card) => {
+      const video = card.querySelector('.work-preview');
+      const source = video?.querySelector('source');
+      video?.pause();
+      source?.removeAttribute('src');
+      video?.load();
+      card.classList.remove('is-previewing');
+    });
+    document.querySelector('[data-language="en"]').click();
+    localStorage.clear();
+    document.querySelector('.skip-link').focus();
+  })()`);
 });
 
 test("a concept preview loads on focus without replacing its poster fallback", async () => {
