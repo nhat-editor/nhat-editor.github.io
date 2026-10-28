@@ -485,6 +485,7 @@ const modalIframe = $("#modalIframe");
 const modalTitle = $("#modalTitle");
 const modalClose = $(".modal-close", modal || document);
 let modalTrigger = null;
+let modalFocusTimer = null;
 
 function setPageInert(inert) {
   $$('body > :not(#modal):not(script)').forEach((element) => { element.inert = inert; });
@@ -510,19 +511,29 @@ function openModal(videoUrl, title, trigger) {
   modal.setAttribute("aria-hidden", "false");
   setPageInert(true);
   document.body.classList.add("no-scroll");
-  const focusCloseButton = () => modalClose?.focus({ preventScroll: true });
+  const focusCloseButton = () => {
+    if (modal.getAttribute("aria-hidden") === "false") modalClose?.focus({ preventScroll: true });
+  };
   if (isLocalVideo) {
     const playback = modalVideo.play();
     if (playback) playback.then(focusCloseButton, focusCloseButton);
   } else {
     focusCloseButton();
   }
-  window.setTimeout(focusCloseButton, 250);
+  if (modalFocusTimer !== null) window.clearTimeout(modalFocusTimer);
+  modalFocusTimer = window.setTimeout(() => {
+    modalFocusTimer = null;
+    focusCloseButton();
+  }, 250);
   trackEvent("open_project", { project_title: title || translate("modal.defaultTitle") });
 }
 
 function closeModal() {
   if (!modal || modal.getAttribute("aria-hidden") === "true") return;
+  if (modalFocusTimer !== null) {
+    window.clearTimeout(modalFocusTimer);
+    modalFocusTimer = null;
+  }
   modal.classList.remove("active");
   modal.setAttribute("aria-hidden", "true");
   setPageInert(false);

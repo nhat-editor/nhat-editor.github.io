@@ -239,6 +239,18 @@ test("project modal opens local video and restores trigger focus on close", asyn
   assert.equal(await evaluate("document.activeElement.classList.contains('work-btn')"), true);
 });
 
+test("rapid modal close keeps focus on its trigger after delayed callbacks", async () => {
+  await evaluate(`(() => {
+    const trigger = document.querySelector('.work-btn');
+    trigger.focus();
+    trigger.click();
+    document.querySelector('.modal-close').click();
+  })()`);
+  await new Promise((resolve) => setTimeout(resolve, 350));
+  assert.equal(await evaluate("document.querySelector('#modal').getAttribute('aria-hidden')"), "true");
+  assert.equal(await evaluate("document.activeElement.classList.contains('work-btn')"), true);
+});
+
 test("a failed preview keeps the poster and project action usable", async () => {
   await evaluate(`(() => {
     const card = document.querySelectorAll('.work-card')[1];
@@ -265,21 +277,33 @@ test("reduced-motion visitors receive static media and no delayed preloader", as
   assert.equal(await evaluate("document.querySelector('.work-card').classList.contains('is-previewing')"), false);
 });
 
-test("390px mobile layout has no horizontal overflow and exposes the menu control", async () => {
+test("390px mobile layout has no overflow and exposes Vietnamese language controls", async () => {
   await send("Emulation.setDeviceMetricsOverride", {
     width: 390, height: 844, deviceScaleFactor: 1, mobile: true,
   });
   await send("Page.reload", { ignoreCache: true });
   await new Promise((resolve) => setTimeout(resolve, 300));
   await waitFor(() => evaluate("document.readyState === 'complete'"));
+  await evaluate(`(() => {
+    document.querySelector('.nav-toggle').click();
+    document.querySelector('.language-switch--mobile [data-language="vi"]').click();
+  })()`);
+  await waitFor(() => evaluate("document.documentElement.lang === 'vi'"));
   const layout = JSON.parse(await evaluate(`JSON.stringify({
     viewport: window.innerWidth,
     pageWidth: document.documentElement.scrollWidth,
     toggleDisplay: getComputedStyle(document.querySelector('.nav-toggle')).display,
-    workColumns: getComputedStyle(document.querySelector('.work-grid')).gridTemplateColumns
+    workColumns: getComputedStyle(document.querySelector('.work-grid')).gridTemplateColumns,
+    languageDisplay: getComputedStyle(document.querySelector('.language-switch--mobile')).display,
+    menuOpen: document.querySelector('.mobile-menu').classList.contains('active'),
+    workLabel: document.querySelector('.mobile-menu a[href="#work"]').textContent
   })`));
   assert.equal(layout.viewport, 390);
   assert.ok(layout.pageWidth <= layout.viewport, `page width ${layout.pageWidth} exceeded ${layout.viewport}`);
   assert.notEqual(layout.toggleDisplay, "none");
   assert.equal(layout.workColumns.split(" ").length, 1);
+  assert.notEqual(layout.languageDisplay, "none");
+  assert.equal(layout.menuOpen, true);
+  assert.equal(layout.workLabel, "Dự án");
+  await evaluate("document.querySelector('[data-language=\"en\"]').click(); localStorage.clear(); true");
 });
