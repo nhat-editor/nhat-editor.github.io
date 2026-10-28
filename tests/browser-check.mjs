@@ -132,8 +132,8 @@ test("optimized portrait loads at its intrinsic size without a color filter", as
     currentSrc: document.querySelector('.about-img img').currentSrc,
     filter: getComputedStyle(document.querySelector('.about-img img')).filter
   })`));
-  assert.equal(portrait.naturalWidth, 1200);
-  assert.equal(portrait.naturalHeight, 1440);
+  assert.equal(portrait.naturalWidth, 1122);
+  assert.equal(portrait.naturalHeight, 1402);
   assert.match(portrait.currentSrc, /\/assets\/avatar\.webp$/);
   assert.equal(portrait.filter, "none");
 });

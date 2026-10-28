@@ -59,10 +59,12 @@ test("about portrait preserves the source image colors", () => {
 test("optimized portrait is a compact WebP used everywhere", () => {
   const portrait = "assets/avatar.webp";
   assert.equal(existsSync(portrait), true, `${portrait} should exist`);
-  assert.equal(execFileSync("identify", ["-format", "%m %wx%h", portrait], { encoding: "utf8" }), "WEBP 1200x1440");
+  const image = readFileSync(portrait);
+  assert.equal(image.toString("ascii", 0, 4), "RIFF");
+  assert.equal(image.toString("ascii", 8, 12), "WEBP");
   assert.ok(statSync(portrait).size >= 10_000 && statSync(portrait).size <= 100_000);
   assert.match(html, /"image": "https:\/\/nhat-editor\.github\.io\/assets\/avatar\.webp"/);
-  assert.match(html, /<img src="assets\/avatar\.webp"[^>]+width="1200"[^>]+height="1440"[^>]+loading="lazy"[^>]+decoding="async"/);
+  assert.match(html, /<img src="assets\/avatar\.webp"[^>]+width="1122"[^>]+height="1402"[^>]+loading="lazy"[^>]+decoding="async"/);
   assert.doesNotMatch(`${html}\n${stylesheet}\n${script}`, /assets\/avatar\.png/);
 });
 
