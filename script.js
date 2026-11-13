@@ -284,13 +284,30 @@ function translate(key, language = currentLanguage) {
   return translations[selectedLanguage][key] ?? translations.en[key] ?? key;
 }
 
+const VIETNAM_TIMEZONES = new Set(["Asia/Ho_Chi_Minh", "Asia/Saigon"]);
+
+function detectDefaultLanguage() {
+  try {
+    const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language].filter(Boolean);
+    if (browserLanguages.some((lang) => /^vi\b/i.test(lang))) {
+      return "vi";
+    }
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (VIETNAM_TIMEZONES.has(timeZone)) {
+      return "vi";
+    }
+  } catch { }
+  return "en";
+}
+
 function getSavedLanguage() {
   try {
     const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    return SUPPORTED_LANGUAGES.has(savedLanguage) ? savedLanguage : "en";
-  } catch {
-    return "en";
-  }
+    if (SUPPORTED_LANGUAGES.has(savedLanguage)) return savedLanguage;
+  } catch { }
+  return detectDefaultLanguage();
 }
 
 function applyLanguage(language, { persist = true } = {}) {
