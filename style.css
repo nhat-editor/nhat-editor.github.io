@@ -732,6 +732,7 @@ button {
   border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   transition: transform .4s var(--ease), box-shadow .4s;
 }
 

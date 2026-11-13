@@ -576,7 +576,14 @@ function closeModal() {
   modalTrigger = null;
 }
 
-$$('.work-btn[data-video]').forEach((button) => button.addEventListener("click", () => openModal(button.dataset.video, button.dataset.title, button)));
+$$(".work-card").forEach((card) => {
+  const button = $(".work-btn[data-video]", card);
+  if (!button) return;
+  card.addEventListener("click", (event) => {
+    if (event.target.closest("a")) return;
+    openModal(button.dataset.video, button.dataset.title, button);
+  });
+});
 modalClose?.addEventListener("click", closeModal);
 modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); });
 
