@@ -29,7 +29,6 @@ const translations = {
     "work.video6.approach": "Tight pacing, dynamic captions, and smooth transitions.",
     "work.video6.outcome": "Keep the viewer engaged from start to finish.",
     "work.video6.buttonTitle": "Video Talking Head",
-    "work.watchVideo": "Watch Video",
 
     "about.cta": "Let’s work together",
     "about.intro.prefix": "I’m",
@@ -113,12 +112,6 @@ const translations = {
     "specialty.motionGraphics": "Motion Graphics",
     "specialty.soundDesign": "Sound Design",
     "specialty.talkingHead": "Talking Head",
-    "work.finance.alt": "Finance explainer concept with animated data graphics",
-    "work.finance.approach": "Tight pacing, kinetic captions, restrained data motion, and purposeful b-roll cues.",
-    "work.finance.brief": "Turn a dense finance topic into an approachable, high-retention explainer.",
-    "work.finance.buttonTitle": "Clarity in Every Cut — Concept Preview",
-    "work.finance.outcome": "Help viewers understand the core idea without losing momentum.",
-    "work.finance.title": "Clarity in Every Cut",
     "work.intro": "Concept studies showing how I think about structure, rhythm, and visual communication.",
     "work.kicker": "02 — Selected Works",
     "work.previewAction": "View Motion Preview",
@@ -159,7 +152,6 @@ const translations = {
     "work.video6.approach": "Nhịp dựng chặt chẽ, phụ đề động và chuyển cảnh mượt mà.",
     "work.video6.outcome": "Giữ chân người xem từ đầu đến cuối video.",
     "work.video6.buttonTitle": "Video Talking Head",
-    "work.watchVideo": "Xem Video",
 
     "about.cta": "Cùng hợp tác nhé",
     "about.intro.prefix": "Tôi là",
@@ -243,12 +235,6 @@ const translations = {
     "specialty.motionGraphics": "Đồ họa chuyển động",
     "specialty.soundDesign": "Thiết kế âm thanh",
     "specialty.talkingHead": "Video talking head",
-    "work.finance.alt": "Ý tưởng video giải thích tài chính với đồ họa dữ liệu chuyển động",
-    "work.finance.approach": "Nhịp dựng chặt chẽ, phụ đề động, chuyển động dữ liệu tiết chế và các điểm chèn b-roll có chủ đích.",
-    "work.finance.brief": "Đơn giản hóa chủ đề tài chính phức tạp thành video giải thích dễ hiểu và giữ chân người xem.",
-    "work.finance.buttonTitle": "Rõ ràng trong từng nhát cắt — Bản xem trước ý tưởng",
-    "work.finance.outcome": "Giúp người xem hiểu ý chính mà không làm mất nhịp theo dõi.",
-    "work.finance.title": "Rõ ràng trong từng nhát cắt",
     "work.intro": "Những bản nghiên cứu ý tưởng thể hiện cách tôi tư duy về cấu trúc, nhịp điệu và truyền đạt hình ảnh.",
     "work.kicker": "02 — Dự án chọn lọc",
     "work.previewAction": "Xem bản xem trước",
@@ -637,3 +623,19 @@ if (!reducedMotion.matches && typeof gsap !== "undefined") {
 $$('a[href^="mailto:"], .socials a[target="_blank"]').forEach((link) => {
   link.addEventListener("click", () => trackEvent("contact_click", { label: link.textContent.trim() }));
 });
+
+/* ---------- Hide floating contact near contact/footer ---------- */
+const floatingContact = $(".floating-contact");
+if (floatingContact && "IntersectionObserver" in window) {
+  const contactVisibility = new Map();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => contactVisibility.set(entry.target, entry.isIntersecting));
+    const nearBottom = Array.from(contactVisibility.values()).some(Boolean);
+    floatingContact.classList.toggle("is-hidden", nearBottom);
+  }, { threshold: 0.05 });
+
+  $$("#contact, .footer").forEach((section) => {
+    contactVisibility.set(section, false);
+    observer.observe(section);
+  });
+}

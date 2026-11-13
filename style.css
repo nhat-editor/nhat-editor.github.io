@@ -1572,9 +1572,11 @@ button {
   transform: scale(1.08);
 }
 
-body.no-scroll .floating-contact {
+body.no-scroll .floating-contact,
+.floating-contact.is-hidden {
   opacity: 0;
   pointer-events: none;
+  transform: translateY(10px);
 }
 
 @keyframes floatingGlow {

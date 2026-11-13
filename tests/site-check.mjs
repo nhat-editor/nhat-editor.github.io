@@ -12,6 +12,7 @@ const conceptSlugs = [
 ];
 
 const html = readFileSync("index.html", "utf8");
+const normalizedHtml = html.replace(/\s+/g, " ");
 const script = readFileSync("script.js", "utf8");
 const stylesheet = readFileSync("style.css", "utf8");
 
@@ -68,11 +69,11 @@ test("optimized portrait is a compact WebP used everywhere", () => {
   assert.doesNotMatch(`${html}\n${stylesheet}\n${script}`, /assets\/avatar\.png/);
 });
 
-test("language controls are available in desktop and mobile navigation", () => {
-  assert.equal((html.match(/class="language-switch(?: [^"]+)?"/g) ?? []).length, 2);
-  assert.equal((html.match(/type="button" data-language="en" aria-pressed="true"/g) ?? []).length, 2);
-  assert.equal((html.match(/type="button" data-language="vi" aria-pressed="false"/g) ?? []).length, 2);
-  assert.equal((html.match(/role="group"[^>]+data-i18n-attr="aria-label:language\.label"/g) ?? []).length, 2);
+test("language controls are available in header navigation", () => {
+  assert.equal((html.match(/class="language-switch(?: [^"]+)?"/g) ?? []).length, 1);
+  assert.equal((html.match(/type="button" data-language="en" aria-pressed="true"/g) ?? []).length, 1);
+  assert.equal((html.match(/type="button" data-language="vi" aria-pressed="false"/g) ?? []).length, 1);
+  assert.equal((normalizedHtml.match(/role="group"[^>]+data-i18n-attr="aria-label:language\.label"/g) ?? []).length, 1);
 });
 
 test("translation markup preserves English as the complete baseline", () => {
@@ -89,7 +90,6 @@ test("translation markup preserves English as the complete baseline", () => {
     "hero.start": "Start a Project",
     "showreel.title": "Featured Showreel",
     "work.title": "Editing Scenarios",
-    "work.disclosure": "Concept Project · Illustrative Content",
     "work.previewAction": "View Motion Preview",
     "about.title.first": "Story first,",
     "process.title": "A clear path from brief to delivery",
@@ -99,11 +99,11 @@ test("translation markup preserves English as the complete baseline", () => {
   };
 
   for (const [key, copy] of Object.entries(essentialText)) {
-    assert.match(html, new RegExp(`data-i18n="${key}"[^>]*>${copy.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}`));
+    assert.match(normalizedHtml, new RegExp(`data-i18n="${key}"[^>]*>${copy.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}`));
   }
 
   for (const mapping of ["aria-label:", "alt:", "title:", "data-title:"]) {
-    assert.match(html, new RegExp(`data-i18n-attr="[^"]*${mapping}`));
+    assert.match(normalizedHtml, new RegExp(`data-i18n-attr="[^"]*${mapping}`));
   }
 });
 
@@ -128,18 +128,16 @@ test("both language dictionaries cover every markup key", () => {
       assert.ok(translations[language][key].length > 0, `${language}.${key} should not be empty`);
     }
   }
-  assert.equal(translations.vi["work.disclosure"], "Dự án ý tưởng · Nội dung minh họa");
   assert.equal(translations.vi["footer.copyright"], "© 2026 Nguyen Quang Nhat. Bảo lưu mọi quyền.");
   assert.match(script, /const LANGUAGE_STORAGE_KEY = "portfolio-language";/);
 });
 
-test("four honest concept projects use only local poster and preview media", () => {
-  assert.equal((html.match(/Concept Project · Illustrative Content/g) ?? []).length, 4);
+test("four work cards use local poster assets without placeholder media", () => {
   assert.equal((html.match(/class="work-card"/g) ?? []).length, 4);
-  assert.doesNotMatch(html, /picsum\.photos|BigBuckBunny|aqz-KE-bpKQ/);
-  for (const slug of conceptSlugs) {
-    assert.match(html, new RegExp(`assets/concepts/${slug}\\.svg`));
-    assert.match(html, new RegExp(`data-preview="assets/concepts/${slug}-preview\\.webm"`));
+  assert.doesNotMatch(html, /picsum\.photos|BigBuckBunny|aqz-KE-bpKQ|img\.youtube\.com/);
+  for (const poster of ["assets/work-anim1.webp", "assets/work-talking-head.webp", "assets/concepts/property-story.svg", "assets/concepts/social-campaign.svg"]) {
+    assert.equal(existsSync(poster), true, `${poster} should exist`);
+    assert.match(html, new RegExp(poster.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
 });
 
@@ -151,15 +149,15 @@ test("concept copy avoids fabricated proof and sets an intended outcome", () => 
 
 test("social proof is framed as service expectations rather than testimonials", () => {
   assert.match(html, /id="expectations"/);
-  assert.match(html, /What clients can expect/);
+  assert.match(normalizedHtml, /What clients can expect/);
   assert.doesNotMatch(html, /testimonials-swiper|client-logo/);
 });
 
 test("heavy video media is deferred until visitor interaction", () => {
   assert.match(html, /data-showreel-src="https:\/\/www\.youtube\.com\/embed\/BeYzqS5ig2o"/);
   assert.doesNotMatch(html, /<iframe[^>]+src=/);
-  assert.equal((html.match(/<video class="work-preview" muted loop playsinline preload="none"/g) ?? []).length, 4);
-  assert.equal((html.match(/<source data-src="assets\/concepts\/.+-preview\.webm"/g) ?? []).length, 4);
+  assert.equal((normalizedHtml.match(/<video class="work-preview" muted loop playsinline preload="none"/g) ?? []).length, 2);
+  assert.equal((html.match(/<source data-src="assets\/concepts\/.+-preview\.webm"/g) ?? []).length, 2);
 });
 
 test("modal markup exposes an accessible dialog and both media modes", () => {
@@ -197,6 +195,8 @@ test("crawler files and the rendered social card target the public site", () => 
   const sitemap = readFileSync("sitemap.xml", "utf8");
   assert.match(robots, /Sitemap: https:\/\/nhat-editor\.github\.io\/sitemap\.xml/);
   assert.match(sitemap, /<loc>https:\/\/nhat-editor\.github\.io\/<\/loc>/);
-  const dimensions = execFileSync("identify", ["-format", "%wx%h", "assets/social-preview.png"], { encoding: "utf8" });
-  assert.equal(dimensions, "1200x630");
+  const png = readFileSync("assets/social-preview.png");
+  const width = png.readUInt32BE(16);
+  const height = png.readUInt32BE(20);
+  assert.equal(`${width}x${height}`, "1200x630");
 });
