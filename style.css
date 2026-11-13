@@ -403,6 +403,12 @@ button {
     display: flex;
   }
 
+  .work-card,
+  .floating-contact {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
   .nav-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(4px, 4px);
   }

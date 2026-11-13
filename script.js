@@ -340,23 +340,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const bar = $(".preloader-bar");
   if (!preloader) return;
 
-  if (reducedMotion.matches) {
+  let preloaderSeen = false;
+  try {
+    preloaderSeen = window.sessionStorage.getItem("preloader-seen") === "1";
+  } catch { }
+
+  if (reducedMotion.matches || preloaderSeen) {
     if (number) number.textContent = "100";
     if (bar) bar.style.width = "100%";
     preloader.classList.add("done");
     return;
   }
 
+  try {
+    window.sessionStorage.setItem("preloader-seen", "1");
+  } catch { }
+
   let progress = 0;
   const interval = window.setInterval(() => {
-    progress = Math.min(100, progress + Math.random() * 25 + 10);
+    progress = Math.min(100, progress + Math.random() * 28 + 18);
     if (number) number.textContent = String(Math.floor(progress));
     if (bar) bar.style.width = `${progress}%`;
     if (progress === 100) {
       window.clearInterval(interval);
-      window.setTimeout(() => preloader.classList.add("done"), 200);
+      window.setTimeout(() => preloader.classList.add("done"), 120);
     }
-  }, 50);
+  }, 35);
 });
 
 /* ---------- Mobile navigation ---------- */
@@ -384,19 +393,27 @@ if (dot && ring && hoverCapable.matches && !reducedMotion.matches) {
   let mouseY = 0;
   let ringX = 0;
   let ringY = 0;
+  let ringRaf = null;
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    if (Math.abs(mouseX - ringX) > 0.1 || Math.abs(mouseY - ringY) > 0.1) {
+      ringRaf = window.requestAnimationFrame(animateRing);
+    } else {
+      ringRaf = null;
+    }
+  }
 
   window.addEventListener("mousemove", (event) => {
     mouseX = event.clientX;
     mouseY = event.clientY;
     dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    if (ringRaf === null) {
+      ringRaf = window.requestAnimationFrame(animateRing);
+    }
   });
-
-  (function animateRing() {
-    ringX += (mouseX - ringX) * 0.15;
-    ringY += (mouseY - ringY) * 0.15;
-    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-    window.requestAnimationFrame(animateRing);
-  })();
 
   $$("a, button, [data-cursor='hover']").forEach((element) => {
     element.addEventListener("mouseenter", () => ring.classList.add("hover"));
