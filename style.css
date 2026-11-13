@@ -384,8 +384,19 @@ button {
     display: none;
   }
 
+  .nav-actions {
+    gap: .75rem;
+  }
+
   .language-switch--desktop {
-    display: none;
+    padding: .2rem;
+  }
+
+  .language-switch--desktop button {
+    min-width: 2rem;
+    min-height: 1.8rem;
+    padding: .28rem .48rem;
+    font-size: .68rem;
   }
 
   .nav-toggle {
@@ -428,10 +439,6 @@ button {
   font-family: var(--serif);
   font-size: 2.5rem;
   letter-spacing: -0.02em;
-}
-
-.language-switch--mobile {
-  margin-top: .5rem;
 }
 
 /* ============ HERO ============ */
