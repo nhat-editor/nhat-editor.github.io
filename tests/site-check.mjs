@@ -200,3 +200,17 @@ test("crawler files and the rendered social card target the public site", () => 
   const height = png.readUInt32BE(20);
   assert.equal(`${width}x${height}`, "1200x630");
 });
+
+test("main index.html is Upwork-safe without direct off-platform contact details", () => {
+  assert.doesNotMatch(html, /mailto:|zalo\.me|wa\.me|Nhatfreelancer\.dv@gmail\.com|contact\.html/i);
+  assert.match(html, /upwork\.com\/freelancers\//);
+});
+
+test("contact.html provides external contact channels and is marked noindex", () => {
+  assert.equal(existsSync("contact.html"), true, "contact.html should exist");
+  const contactHtml = readFileSync("contact.html", "utf8");
+  assert.match(contactHtml, /<meta name="robots" content="noindex, nofollow"/);
+  assert.match(contactHtml, /mailto:Nhatfreelancer\.dv@gmail\.com/);
+  assert.match(contactHtml, /zalo\.me\//);
+  assert.match(contactHtml, /wa\.me\//);
+});
