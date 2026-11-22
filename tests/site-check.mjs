@@ -135,7 +135,7 @@ test("both language dictionaries cover every markup key", () => {
 test("four work cards use local poster assets without placeholder media", () => {
   assert.equal((html.match(/class="work-card"/g) ?? []).length, 4);
   assert.doesNotMatch(html, /picsum\.photos|BigBuckBunny|aqz-KE-bpKQ|img\.youtube\.com/);
-  for (const poster of ["assets/work-anim1.webp", "assets/work-talking-head.webp", "assets/concepts/property-story.svg", "assets/concepts/social-campaign.svg"]) {
+  for (const poster of ["assets/work-anim1.webp", "assets/work-talking-head.webp", "assets/work-documentary.webp", "assets/concepts/social-campaign.svg"]) {
     assert.equal(existsSync(poster), true, `${poster} should exist`);
     assert.match(html, new RegExp(poster.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
@@ -156,8 +156,8 @@ test("social proof is framed as service expectations rather than testimonials", 
 test("heavy video media is deferred until visitor interaction", () => {
   assert.match(html, /data-showreel-src="https:\/\/www\.youtube\.com\/embed\/BeYzqS5ig2o"/);
   assert.doesNotMatch(html, /<iframe[^>]+src=/);
-  assert.equal((normalizedHtml.match(/<video class="work-preview" muted loop playsinline preload="none"/g) ?? []).length, 2);
-  assert.equal((html.match(/<source data-src="assets\/concepts\/.+-preview\.webm"/g) ?? []).length, 2);
+  assert.equal((normalizedHtml.match(/<video class="work-preview" muted loop playsinline preload="none"/g) ?? []).length, 1);
+  assert.equal((html.match(/<source data-src="assets\/concepts\/.+-preview\.webm"/g) ?? []).length, 1);
 });
 
 test("modal markup exposes an accessible dialog and both media modes", () => {
