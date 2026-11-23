@@ -90,7 +90,7 @@ test("translation markup preserves English as the complete baseline", () => {
     "hero.start": "Start a Project",
     "showreel.title": "Featured Showreel",
     "work.title": "Editing Scenarios",
-    "work.previewAction": "View Motion Preview",
+    "work.watchVideo": "Watch Video",
     "about.title.first": "Story first,",
     "process.title": "A clear path from brief to delivery",
     "expectations.title": "What clients can expect",
@@ -135,7 +135,7 @@ test("both language dictionaries cover every markup key", () => {
 test("four work cards use local poster assets without placeholder media", () => {
   assert.equal((html.match(/class="work-card"/g) ?? []).length, 4);
   assert.doesNotMatch(html, /picsum\.photos|BigBuckBunny|aqz-KE-bpKQ|img\.youtube\.com/);
-  for (const poster of ["assets/work-anim1.webp", "assets/work-talking-head.webp", "assets/work-documentary.webp", "assets/concepts/social-campaign.svg"]) {
+  for (const poster of ["assets/work-anim1.webp", "assets/work-talking-head.webp", "assets/work-documentary.webp", "assets/work-faceless.webp"]) {
     assert.equal(existsSync(poster), true, `${poster} should exist`);
     assert.match(html, new RegExp(poster.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
@@ -156,8 +156,8 @@ test("social proof is framed as service expectations rather than testimonials", 
 test("heavy video media is deferred until visitor interaction", () => {
   assert.match(html, /data-showreel-src="https:\/\/www\.youtube\.com\/embed\/BeYzqS5ig2o"/);
   assert.doesNotMatch(html, /<iframe[^>]+src=/);
-  assert.equal((normalizedHtml.match(/<video class="work-preview" muted loop playsinline preload="none"/g) ?? []).length, 1);
-  assert.equal((html.match(/<source data-src="assets\/concepts\/.+-preview\.webm"/g) ?? []).length, 1);
+  assert.equal((normalizedHtml.match(/<video class="work-preview" muted loop playsinline preload="none"/g) ?? []).length, 0);
+  assert.equal((html.match(/<source data-src="assets\/concepts\/.+-preview\.webm"/g) ?? []).length, 0);
 });
 
 test("modal markup exposes an accessible dialog and both media modes", () => {
