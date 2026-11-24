@@ -649,7 +649,7 @@ if (!reducedMotion.matches && typeof gsap !== "undefined") {
   });
 }
 
-$$('a[href^="mailto:"], .socials a[target="_blank"]').forEach((link) => {
+$$('a[href^="mailto:"], .contact-mail, .socials a[target="_blank"]').forEach((link) => {
   link.addEventListener("click", () => trackEvent("contact_click", { label: link.textContent.trim() }));
 });
 

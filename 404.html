@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Nguyen Quang Nhat</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#050806" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background: radial-gradient(circle at 50% 25%, rgba(34, 199, 154, 0.14), transparent 55%), #050806;
+      color: #e2f0ea;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      text-align: center;
+    }
+    .card {
+      max-width: 30rem;
+      padding: 3rem 2.25rem;
+      border-radius: 20px;
+      background: rgba(10, 16, 13, 0.65);
+      border: 1px solid rgba(34, 199, 154, 0.22);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    }
+    .code {
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #22c79a;
+      margin-bottom: 0.85rem;
+    }
+    h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      line-height: 1.15;
+      margin-bottom: 0.85rem;
+    }
+    p {
+      color: #86a898;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      background: #22c79a;
+      color: #041008;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(34, 199, 154, 0.32);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <p class="code">404 · Not Found</p>
+    <h1 id="title">This frame isn’t in the cut.</h1>
+    <p id="desc">The page you’re looking for doesn’t exist or has been moved.</p>
+    <a id="cta" href="/">Back to Portfolio ↑</a>
+  </main>
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("portfolio-language"); } catch (e) {}
+      var isVi = saved === "vi" || (!saved && (/^vi\b/i.test(navigator.language || "") || ["Asia/Ho_Chi_Minh", "Asia/Saigon"].includes(Intl.DateTimeFormat().resolvedOptions().timeZone)));
+      if (isVi) {
+        document.documentElement.lang = "vi";
+        document.getElementById("title").textContent = "Trang này không tồn tại.";
+        document.getElementById("desc").textContent = "Đường dẫn bạn đang tìm không có hoặc đã được chuyển đi.";
+        document.getElementById("cta").textContent = "Quay lại Portfolio ↑";
+      }
+    })();
+  </script>
+</body>
+
+</html>
