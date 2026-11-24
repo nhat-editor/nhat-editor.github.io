@@ -132,18 +132,18 @@ test("both language dictionaries cover every markup key", () => {
   assert.match(script, /const LANGUAGE_STORAGE_KEY = "portfolio-language";/);
 });
 
-test("four work cards use local poster assets without placeholder media", () => {
-  assert.equal((html.match(/class="work-card"/g) ?? []).length, 4);
+test("five work cards use local poster assets without placeholder media", () => {
+  assert.equal((html.match(/class="work-card"/g) ?? []).length, 5);
   assert.doesNotMatch(html, /picsum\.photos|BigBuckBunny|aqz-KE-bpKQ|img\.youtube\.com/);
-  for (const poster of ["assets/work-anim1.webp", "assets/work-talking-head.webp", "assets/work-documentary.webp", "assets/work-faceless.webp"]) {
+  for (const poster of ["assets/work-anim1.webp", "assets/work-talking-head.webp", "assets/work-documentary.webp", "assets/work-faceless.webp", "assets/work-camera3d.webp"]) {
     assert.equal(existsSync(poster), true, `${poster} should exist`);
     assert.match(html, new RegExp(poster.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
 });
 
 test("concept copy avoids fabricated proof and sets an intended outcome", () => {
-  assert.equal((html.match(/class="case-study"/g) ?? []).length, 4);
-  assert.equal((html.match(/Intended outcome:/g) ?? []).length, 4);
+  assert.equal((html.match(/class="case-study"/g) ?? []).length, 5);
+  assert.equal((html.match(/Intended outcome:/g) ?? []).length, 5);
   assert.doesNotMatch(html, /Happy Clients|Videos Delivered|150\+|40\+/);
 });
 
