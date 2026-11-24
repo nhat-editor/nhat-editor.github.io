@@ -7,6 +7,14 @@ const hoverCapable = window.matchMedia("(hover: hover) and (pointer: fine)");
 /* Analytics stays inactive until a real provider ID is supplied. */
 const ANALYTICS_MEASUREMENT_ID = "";
 function trackEvent(name, parameters = {}) {
+  const label = parameters.project_title || parameters.label || "";
+  if (typeof window.goatcounter?.count === "function") {
+    window.goatcounter.count({
+      path: label ? `${name}:${label}` : name,
+      title: label || name,
+      event: true,
+    });
+  }
   if (!ANALYTICS_MEASUREMENT_ID || typeof window.gtag !== "function") return;
   window.gtag("event", name, parameters);
 }
